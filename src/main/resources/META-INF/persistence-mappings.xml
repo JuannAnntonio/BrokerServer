@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <entity class="mx.sigmact.broker.model.AggressionStatusEntity">
+        <table name="AGGRESSION_STATUS" schema="SIGMACT_BROKER"/>
+        <attributes>
+            <id name="idTransactionStatus">
+                <column name="id_transaction_status" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="20"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.CalendarEntity">
+        <table name="CALENDAR" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idHolidays">
+                <column name="id_holidays" precision="11"/>
+            </id>
+            <basic name="date">
+                <column name="date" precision="-1"/>
+            </basic>
+            <basic name="description">
+                <column name="description" nullable="false"/>
+            </basic>
+            <basic name="fkIdMarketType">
+                <column name="fk_id_market_type" precision="11"/>
+            </basic>
+            <basic name="isHoliday">
+                <column name="is_holiday" precision="1"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.InstitutionEntity">
+        <table name="INSTITUTION" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idInstitution">
+                <column name="id_institution" precision="11"/>
+            </id>
+            <basic name="key">
+                <column name="institution_key" length="20"/>
+            </basic>
+            <basic name="name">
+                <column name="name" length="20"/>
+            </basic>
+            <basic name="phoneNumber">
+                <column name="phone_number" length="45"/>
+            </basic>
+            <basic name="systemCommission">
+                <column name="system_commission" precision="-1"/>
+            </basic>
+            <basic name="enabled">
+                <column name="enabled" precision="1"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.BrokerPropertiesEntity">
+        <table name="BROKER_PROPERTIES" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idBrokerProperties">
+                <column name="id_broker_properties" precision="11"/>
+            </id>
+            <basic name="activeValueTypeCount">
+                <column name="active_value_type_count" precision="11"/>
+            </basic>
+            <basic name="waitingSecondsAfterAggresion">
+                <column name="waiting_seconds_after_aggresion" precision="11"/>
+            </basic>
+            <basic name="waitingSecondsAfterBidding">
+                <column name="waiting_seconds_after_bidding" precision="11"/>
+            </basic>
+            <basic name="waitingSecondsAfterBiddingIncrease">
+                <column name="waiting_seconds_after_bidding_increase" precision="11"/>
+            </basic>
+            <basic name="bidAliveTime">
+                <column name="bid_alive_time" precision="11"/>
+            </basic>
+            <basic name="valmerPriceVectorService">
+                <column name="valmer_price_vector_service" length="255"/>
+            </basic>
+            <basic name="bancoDeMexicoWsdl">
+                <column name="banco_de_mexico_wsdl" length="255"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.InstitutionWorkbenchPriorityEntity">
+        <table name="INSTITUTION_WORKBENCH_PRIORITY" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idInstitutionWorkbench">
+                <column name="id_institution_workbench" precision="11"/>
+            </id>
+            <basic name="fkIdMainInstitution">
+                <column name="fk_id_main_institution" precision="11"/>
+            </basic>
+            <basic name="fkIdWorkbenchInstitution">
+                <column name="fk_id_workbench_institution" precision="11"/>
+            </basic>
+            <basic name="priority">
+                <column name="priority" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.InstrumentTypeEntity">
+        <table name="INSTRUMENT_TYPE" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idInstrument">
+                <column name="id_instrument" precision="11"/>
+            </id>
+            <basic name="issuingCompany">
+                <column name="issuing_company" length="25"/>
+            </basic>
+            <basic name="tv">
+                <column name="tv" length="10"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.MarketTypeEntity">
+        <table name="MARKET_TYPE" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idMarketType">
+                <column name="id_market_type" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="45"/>
+            </basic>
+            <basic name="country">
+                <column name="country" length="45"/>
+            </basic>
+            <basic name="timeZone">
+                <column name="time_zone" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.RolesEntity">
+        <table name="ROLES" schema="SIGMACT_BROKER" />
+        <id-class class="mx.sigmact.broker.model.RolesEntityPK"/>
+        <attributes>
+            <id name="fkIdUser">
+                <column name="fk_id_user" precision="11"/>
+            </id>
+            <id name="role">
+                <column name="ROLE" length="10"/>
+            </id>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.StandingStatusEntity">
+        <table name="STANDING_STATUS" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idStandingStatus">
+                <column name="id_standing_status" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" length="20"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.StandingTypeEntity">
+        <table name="STANDING_TYPE" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idStandingType">
+                <column name="id_standing_type" precision="11"/>
+            </id>
+            <basic name="name">
+                <column name="name" nullable="false" length="20"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.ValmerPriceVectorEntity">
+        <table name="VALMER_PRICE_VECTOR" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idValmerPriceVector">
+                <column name="id_valmer_price_vector" precision="11"/>
+            </id>
+            <basic name="date">
+                <column name="date" precision="-1"/>
+            </basic>
+            <basic name="issue">
+                <column name="issue" length="25"/>
+            </basic>
+            <basic name="tv">
+                <column name="tv" length="4"/>
+            </basic>
+            <basic name="issuingCompany">
+                <column name="issuing_company" length="15"/>
+            </basic>
+            <basic name="series">
+                <column name="series" length="10"/>
+            </basic>
+            <basic name="instrumentType">
+                <column name="instrument_type" length="25"/>
+            </basic>
+            <basic name="marketSurcharge">
+                <column name="market_surcharge" precision="-1"/>
+            </basic>
+            <basic name="placementSurcharge">
+                <column name="placement_surcharge" precision="-1"/>
+            </basic>
+            <basic name="incomeTax">
+                <column name="income_tax" precision="-1"/>
+            </basic>
+            <basic name="totalSurcharge">
+                <column name="total_surcharge" precision="-1"/>
+            </basic>
+            <basic name="yield">
+                <column name="yield" precision="-1"/>
+            </basic>
+            <basic name="couponRate">
+                <column name="coupon_rate" precision="-1"/>
+            </basic>
+            <basic name="termDays">
+                <column name="term_days" precision="11"/>
+            </basic>
+            <basic name="placementDate">
+                <column name="placement_date" precision="-1"/>
+            </basic>
+            <basic name="expirationDate">
+                <column name="expiration_date" precision="-1"/>
+            </basic>
+            <basic name="daysToExpire">
+                <column name="days_to_expire" precision="11"/>
+            </basic>
+            <basic name="discountCurve">
+                <column name="discount_curve" length="35"/>
+            </basic>
+            <basic name="couponPeriod">
+                <column name="coupon_period" length="10"/>
+            </basic>
+            <basic name="fitch">
+                <column name="fitch" length="15"/>
+            </basic>
+            <basic name="sp">
+                <column name="sp" length="15"/>
+            </basic>
+            <basic name="moodis">
+                <column name="moodis" length="15"/>
+            </basic>
+            <basic name="hr">
+                <column name="hr" length="20"/>
+            </basic>
+            <basic name="cve">
+                <column name="cve" precision="11"/>
+            </basic>
+            <basic name="couponStart">
+                <column name="coupon_start" precision="-1"/>
+            </basic>
+            <basic name="couponEnd">
+                <column name="coupon_end" precision="-1"/>
+            </basic>
+            <basic name="dirtyPrice">
+                <column name="dirty_price" precision="-1"/>
+            </basic>
+            <basic name="cleanPrice">
+                <column name="clean_price" precision="-1"/>
+            </basic>
+            <basic name="interest">
+                <column name="interest" precision="-1"/>
+            </basic>
+            <basic name="adjustedTerm">
+                <column name="adjusted_term" precision="-1"/>
+            </basic>
+            <basic name="convexity">
+                <column name="convexity" precision="-1"/>
+            </basic>
+            <basic name="updatedNominalValue">
+                <column name="updated_nominal_value" precision="-1"/>
+            </basic>
+            <basic name="signedValue">
+                <column name="signed_value" precision="20"/>
+            </basic>
+            <basic name="oustandingAmount">
+                <column name="oustanding_amount" precision="-1"/>
+            </basic>
+            <basic name="commonRepresentative">
+                <column name="common_representative" length="15"/>
+            </basic>
+            <basic name="placementAgent">
+                <column name="placement_agent" length="15"/>
+            </basic>
+            <basic name="couponsDueToExpire">
+                <column name="coupons_due_to_expire" precision="11"/>
+            </basic>
+            <basic name="expiredCoupons">
+                <column name="expired_coupons" precision="11"/>
+            </basic>
+            <basic name="daysToContractClosing">
+                <column name="days_to_contract_closing" precision="11"/>
+            </basic>
+            <basic name="sector">
+                <column name="sector" length="10"/>
+            </basic>
+            <basic name="isin">
+                <column name="ISIN" length="12"/>
+            </basic>
+            <basic name="verum">
+                <column name="VERUM" length="15"/>
+            </basic>
+            <basic name="fkIdMarketType">
+                <column name="fk_id_market_type" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.AggressionEntity">
+        <table name="AGGRESSION" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idAggression">
+                <column name="id_aggression" precision="11"/>
+            </id>
+            <basic name="fkIdStanding">
+                <column name="fk_id_standing" precision="11"/>
+            </basic>
+            <basic name="fkIdTransactionStatus">
+                <column name="fk_id_transaction_status" precision="11"/>
+            </basic>
+            <basic name="fkIdUser">
+                <column name="fk_id_user" precision="11"/>
+            </basic>
+            <basic name="fkIdInstitution">
+                <column name="fk_id_institution" precision="11"/>
+            </basic>
+            <basic name="datetime">
+                <column name="datetime" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.StandingEntity">
+        <table name="STANDING" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idStanding">
+                <column name="id_standing" precision="11"/>
+            </id>
+            <basic name="fkIdStandingType">
+                <column name="fk_id_standing_type" precision="11"/>
+            </basic>
+            <basic name="fkIdValmerPriceVector">
+                <column name="fk_id_valmer_price_vector" precision="11"/>
+            </basic>
+            <basic name="fkIdUser">
+                <column name="fk_id_user" precision="11"/>
+            </basic>
+            <basic name="amount">
+                <column name="amount" precision="11"/>
+            </basic>
+            <basic name="value">
+                <column name="value" precision="-1"/>
+            </basic>
+            <basic name="fkIdStandingStatus">
+                <column name="fk_id_standing_status" precision="11"/>
+            </basic>
+            <basic name="datetime">
+                <column name="datetime" nullable="false" precision="-1"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.UserEntity">
+        <table name="USER" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idUser">
+                <column name="id_user" precision="11"/>
+            </id>
+            <basic name="username">
+                <column name="USERNAME" length="20"/>
+            </basic>
+            <basic name="password">
+                <column name="PASSWORD" length="32"/>
+            </basic>
+            <basic name="email">
+                <column name="email" length="128"/>
+            </basic>
+            <basic name="fkIdInstitution">
+                <column name="fk_id_institution" precision="11"/>
+            </basic>
+            <basic name="enabled">
+                <column name="ENABLED" precision="6"/>
+            </basic>
+            <basic name="phoneNumber">
+                <column name="phone_number" length="14"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.OperatingHourEntity">
+        <table name="OPERATING_HOUR" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idOperatingHours">
+                <column name="id_operating_hours" precision="11"/>
+            </id>
+            <basic name="opening">
+                <column name="opening" length="45"/>
+            </basic>
+            <basic name="closing">
+                <column name="closing" length="45"/>
+            </basic>
+            <basic name="fkIdMarketType">
+                <column name="fk_id_market_type" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+    <entity class="mx.sigmact.broker.model.UserxinstrumentEntity">
+        <table name="USERXINSTRUMENT" schema="SIGMACT_BROKER" />
+        <attributes>
+            <id name="idUserxinstrument">
+                <column name="id_userxinstrument" precision="11"/>
+            </id>
+            <basic name="fkIdUser">
+                <column name="fk_id_user" precision="11"/>
+            </basic>
+            <basic name="fkIdInstrument">
+                <column name="fk_id_instrument" precision="11"/>
+            </basic>
+            <basic name="priority">
+                <column name="priority" precision="11"/>
+            </basic>
+        </attributes>
+    </entity>
+</entity-mappings>

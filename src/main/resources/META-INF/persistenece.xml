@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+  <persistence-unit name="sigmact_broker" transaction-type="JTA">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <jta-data-source>java:/jdbc/sigmact_broker/data_source</jta-data-source>
+    <mapping-file>META-INF/persistence-mappings.xml</mapping-file>
+    <class>mx.sigmact.broker.model.AggressionEntity</class>
+    <class>mx.sigmact.broker.model.AggressionStatusEntity</class>
+    <class>mx.sigmact.broker.model.CalendarEntity</class>
+    <class>mx.sigmact.broker.model.InstitutionEntity</class>
+    <class>mx.sigmact.broker.model.InstitutionWorkbenchPriorityEntity</class>
+    <class>mx.sigmact.broker.model.InstrumentTypeEntity</class>
+    <class>mx.sigmact.broker.model.MarketTypeEntity</class>
+    <class>mx.sigmact.broker.model.OperatingHourEntity</class>
+    <class>mx.sigmact.broker.model.RolesEntity</class>
+    <class>mx.sigmact.broker.model.RolesEntityPK</class>
+    <class>mx.sigmact.broker.model.StandingEntity</class>
+    <class>mx.sigmact.broker.model.StandingStatusEntity</class>
+    <class>mx.sigmact.broker.model.StandingTypeEntity</class>
+    <class>mx.sigmact.broker.model.UserEntity</class>
+    <class>mx.sigmact.broker.model.UserxinstrumentEntity</class>
+    <class>mx.sigmact.broker.model.ValmerPriceVectorEntity</class>
+    <class>mx.sigmact.broker.model.CeteValueEntity</class>
+    <class>mx.sigmact.broker.model.InstitutionInstrumentsEntity</class>
+    <class>mx.sigmact.broker.model.UdiValueEntity</class>
+    <properties>
+      <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect"/>
+      <property name="hibernate.showSql" value="true"/>
+    </properties>
+  </persistence-unit>
+</persistence>
