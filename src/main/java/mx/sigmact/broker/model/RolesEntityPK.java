@@ -8,6 +8,7 @@ import java.io.Serializable;
  * Roles primary key
  * Created on 15/10/16.
  */
+
 public class RolesEntityPK implements Serializable {
     private int fkIdUser;
     private String role;

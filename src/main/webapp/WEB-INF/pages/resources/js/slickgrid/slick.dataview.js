@@ -329,6 +329,9 @@
     }
 
     function updateItem(id, item) {
+    	
+    console.log("[slick.dataview][updateItem]");
+    	
       if (idxById[id] === undefined || id !== item[idProperty]) {
         throw new Error("Invalid or non-matching id");
       }

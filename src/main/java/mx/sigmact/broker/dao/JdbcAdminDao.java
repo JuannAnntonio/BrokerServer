@@ -1,17 +1,5 @@
 package mx.sigmact.broker.dao;
 
-import mx.sigmact.broker.core.util.CalendarUtil;
-import mx.sigmact.broker.model.InstitutionEntity;
-import mx.sigmact.broker.model.InstrumentTypeEntity;
-import mx.sigmact.broker.pojo.admin.*;
-import mx.sigmact.broker.pojo.graphs.LineGraphTwoLineElements;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-
-import javax.annotation.Resource;
-import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +9,27 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+
+import mx.sigmact.broker.core.lib.DaoHelper;
+import mx.sigmact.broker.core.util.CalendarUtil;
+import mx.sigmact.broker.model.InstitutionEntity;
+import mx.sigmact.broker.model.InstrumentTypeEntity;
+import mx.sigmact.broker.pojo.admin.AdminDashboard;
+import mx.sigmact.broker.pojo.admin.AdminInstitutions;
+import mx.sigmact.broker.pojo.admin.AdminMatrix;
+import mx.sigmact.broker.pojo.admin.AdminMatrix2;
+import mx.sigmact.broker.pojo.admin.AdminUsersView;
+import mx.sigmact.broker.pojo.admin.InstitutionWorkbenches;
+import mx.sigmact.broker.pojo.admin.UserInstruments;
+import mx.sigmact.broker.pojo.graphs.LineGraphTwoLineElements;
+
 /**
  * Created on 14/11/2016.
  */
@@ -29,7 +38,19 @@ public class JdbcAdminDao implements AdminDao {
 
     @Resource
     DataSource dataSource;
+    
+    @Resource
+	DaoHelper daoHelper;
 
+    @Value("${query.madrix.edit}")
+    String sqlMatrixEdit;
+    
+    @Value("${query.admin.matrix}")
+    String sqlMatrix;
+    
+    @Value("${query.admin.matrix2}")
+    String sqlMatrix2;
+    
     @Value("${query.admin.institution}")
     String sqlStatement;
 
@@ -102,6 +123,9 @@ public class JdbcAdminDao implements AdminDao {
                     result.add(item);
                 }
             }
+
+			con.close();
+			
         } catch (SQLException e) {
             log.error(e.getMessage());
         } finally {
@@ -109,7 +133,139 @@ public class JdbcAdminDao implements AdminDao {
 
         return result;
     }
+    
+    @Override
+    public List<AdminMatrix> findAdminMatrix(String institucion) {
+    	
+    	List<AdminMatrix> mi = new ArrayList<>();
+    	
+    	log.info("[JdbcAdminDao][findAdminMatrix]");
+    	log.info("[JdbcAdminDao][findAdminMatrix] institucion: " + institucion);
+    	
+    	try {
+			try(Connection con = dataSource.getConnection();
+					PreparedStatement ps = daoHelper.createPreparedStatementVar(con, sqlMatrix,   			
+							institucion);
+		             ResultSet rs = ps.executeQuery();){
+				log.info("[JdbcAdminDao][findAdminMatrix][Try]");
+				
+				int i = 0;
+				while (rs.next()) {
+					
+					String id= rs.getString(1);
+					log.info("[JdbcAdminDao][findAdminMatrix] exec query Res: " + i + " idComision: " + id);
+					log.info("[JdbcAdminDao][findAdminMatrix] exec query Res: " + i + " idInstitucion1: " + rs.getString(2));
+					log.info("[JdbcAdminDao][findAdminMatrix] exec query Res: " + i + " Institucion1: " + rs.getString(3));
+					log.info("[JdbcAdminDao][findAdminMatrix] exec query Res: " + i + " Instrumento: " + rs.getString(4));
+					log.info("[JdbcAdminDao][findAdminMatrix] exec query Res: " + i + " Comision: " + rs.getString(5));
+					log.info("[JdbcAdminDao][findAdminMatrix] exec query Res: " + i + " idInstitucion2: " + rs.getString(6));
+					log.info("[JdbcAdminDao][findAdminMatrix] exec query Res: " + i + " Institucion2: " + rs.getString(7));
+					
+					
+					AdminMatrix row = new AdminMatrix(rs.getString(1),
+							rs.getString(2),
+							rs.getString(3),
+							rs.getString(4),
+							rs.getString(5),
+							rs.getString(6),
+							rs.getString(7),
+							editMatrix(id));
+							
+					mi.add(row);
+					
+					i++;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 
+				log.info("[JdbcAdminDao][findAdminMatrix] ERROR: " + e.toString());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			log.info("[JdbcAdminDao][findAdminMatrix] EROR: " + e.toString());
+		}
+    	
+    	return mi;
+    }
+    
+    @Override
+    public List<AdminMatrix2> findAdminMatrix2(String id) {
+    	
+    	List<AdminMatrix2> mi = new ArrayList<>();
+    	
+    	log.info("[JdbcAdminDao][findAdminMatrix2]");
+    	log.info("[JdbcAdminDao][findAdminMatrix2] id_comision: " + id);
+    	
+    	try {
+			try(Connection con = dataSource.getConnection();
+					PreparedStatement ps = daoHelper.createPreparedStatementVar(con, sqlMatrix2,   			
+							id);
+		             ResultSet rs = ps.executeQuery();){
+				log.info("[JdbcAdminDao][findAdminMatrix2][Try]");
+				
+				int i = 0;
+				while (rs.next()) {
+					
+					log.info("[JdbcAdminDao][findAdminMatrix2] exec query Res: " + i + " idComision: " + rs.getString(1));
+					log.info("[JdbcAdminDao][findAdminMatrix2] exec query Res: " + i + " Institucion1: " + rs.getString(2));
+					log.info("[JdbcAdminDao][findAdminMatrix2] exec query Res: " + i + " Instrumento: " + rs.getString(3));
+					log.info("[JdbcAdminDao][findAdminMatrix2] exec query Res: " + i + " Comision: " + rs.getString(4));
+					log.info("[JdbcAdminDao][findAdminMatrix2] exec query Res: " + i + " Institucion2: " + rs.getString(5));
+					
+					
+					AdminMatrix2 row = new AdminMatrix2(rs.getString(1),rs.getString(2),rs.getString(3),
+							rs.getString(4),rs.getString(5));
+					
+					mi.add(row);
+					
+					i++;
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+
+				log.info("[JdbcAdminDao][findAdminMatrix2] ERROR: " + e.toString());
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			log.info("[JdbcAdminDao][findAdminMatrix2] ERROR: " + e.toString());
+		}
+    	
+    	return mi;
+    }
+
+    public int findEditMatrix (String id, String comision) {
+    	
+    	
+    	log.info("[JdbcAdminDao][findEditMatrix]");
+    	log.info("[JdbcAdminDao][findEditMatrix] id_comision: " + id);
+    	log.info("[JdbcAdminDao][findEditMatrix] comision: " + comision);
+    	
+    	try(Connection con = dataSource.getConnection();
+				PreparedStatement ps = daoHelper.createPreparedStatementVar(con, sqlMatrixEdit,	
+						comision, 
+						id);){
+			log.info("[JdbcAdminDao][findEditMatrix][Try]");
+			log.info("Query: " + ps);
+			int cont= ps.executeUpdate();
+			if(cont>0) {
+				//Insertar alertas que si se hizo el cambio 
+				return 1;
+			}else{
+				//Insertar alertas que no se hizo el cambio
+				return 0;
+			}
+    	}catch (SQLException e) {
+    		log.info("[JdbcAdminDao][findEditMatrix] Error: "+ e);
+    		return 0;
+    	}  	
+    }
+    
     @Override
     public AdminDashboard findDashBoardData() {
         AdminDashboard ad = new AdminDashboard();
@@ -132,6 +288,9 @@ public class JdbcAdminDao implements AdminDao {
             }
             ad.setLastQuarterActivityStandings(g1);
             ad.setLastQuarterTradedAmount(g2);
+
+			con.close();
+			
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -148,6 +307,8 @@ public class JdbcAdminDao implements AdminDao {
              PreparedStatement ps = createPreparedStatementVar(con, sqlAdminUsers);
              ResultSet rs = ps.executeQuery()) {
            handleUserView(rs,list);
+			con.close();
+			
         } catch (SQLException e) {
             log.error("Genral error: " + e.getMessage());
             log.error("Localized error: " + e.getLocalizedMessage());
@@ -162,6 +323,7 @@ public class JdbcAdminDao implements AdminDao {
              PreparedStatement ps = createPreparedStatementVar(con, sqlAdminUsersByInstitution, institution);
              ResultSet rs = ps.executeQuery()) {
             handleUserView(rs, list);
+			con.close();
         } catch (SQLException e) {
             log.error("Genral error: " + e.getMessage());
             log.error("Localized error: " + e.getLocalizedMessage());
@@ -201,6 +363,7 @@ public class JdbcAdminDao implements AdminDao {
                     inactive.add(instrumentTypeEntity);
                 }
             }
+			con.close();
         } catch (SQLException e) {
             log.error("General error: " + e.getMessage());
             log.error("Localized error: " + e.getLocalizedMessage());
@@ -233,6 +396,7 @@ public class JdbcAdminDao implements AdminDao {
                     inactive.add(institution);
                 }
             }
+			con.close();
         } catch (SQLException e) {
             log.error("General error: " + e.getMessage());
             log.error("Localized error: " + e.getLocalizedMessage());
@@ -285,7 +449,14 @@ public class JdbcAdminDao implements AdminDao {
                 .append(LINKSUFFIX);
         return result.toString();
     }
-
+    
+    private String editMatrix(String id) {
+        StringBuilder result = new StringBuilder();
+        result.append(LINKPREFIX).append("matrix_detail?id=")
+		        .append(id)
+		        .append(LINKSUFFIXICON);
+		return result.toString();
+	}
 
     private PreparedStatement createPreparedStatementVar(Connection con, String sql, String... vars) throws SQLException {
         PreparedStatement ps = con.prepareStatement(sql);

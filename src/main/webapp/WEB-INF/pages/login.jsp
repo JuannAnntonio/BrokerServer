@@ -21,7 +21,8 @@
 <div entityId="wrapper">
     <%@include file="component_navigation_login.jsp" %>
     <div class="row">
-        <div class="col-sm-6 col-md-6 col-md-offset-3">
+        <div class="col-md-3 col-sm-3"></div>
+        <div class="col-sm-6 col-md-6">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading center-text">
                     <h2 class="panel-title">Iniciar sesión</h2>

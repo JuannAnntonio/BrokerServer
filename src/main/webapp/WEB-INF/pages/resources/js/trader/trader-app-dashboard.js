@@ -18,7 +18,6 @@ trader_dashboard.service("activityService", function () {
     this.container = {data: undefined}
 });
 
-
 trader_dashboard.controller('table_controller',
     ['$scope',
         '$http',
@@ -43,6 +42,14 @@ trader_dashboard.controller('table_controller',
                 $(cellNode).append(htmlElements);
             }
 
+            function span_renderer(cellNode) {
+                var interpolated = $interpolate($(cellNode).html())($scope);
+                var linker = $compile(interpolated);
+                var htmlElements = linker($scope);
+                $(cellNode).empty();
+                $(cellNode).append(htmlElements);
+            }
+
             /**
              * Slickgrid variables
              */
@@ -56,7 +63,9 @@ trader_dashboard.controller('table_controller',
                 enableCellNavigation: true,
                 asyncEditorLoading: false,
                 enableAsyncPostRender: true,
-                enableColumnReorder: false
+                enableColumnReorder: false,
+                autoHeight:false,
+                fullWidthRows:true
             };
             $scope.grid.columns = [
                 {
@@ -64,9 +73,10 @@ trader_dashboard.controller('table_controller',
                     name: "DxV",
                     field: "dxv",
                     sortable: false,
-                    width: 45,
-                    minWidth: 45,
-                    maxWidth: 45
+                    width: 55,
+                    cssClass:"column-text-right",
+                    minWidth: 55,
+                    maxWidth: 55
                 },
                 {
                     id: "instrument",
@@ -85,9 +95,9 @@ trader_dashboard.controller('table_controller',
                     sortable: false,
                     formatter: button_accept_bid_formatter,
                     asyncPostRender: button_renderer,
-                    width: 30,
-                    minWidth: 30,
-                    maxWidth: 30
+                    width: 40,
+                    minWidth: 40,
+                    maxWidth: 40
                 },
                 {
                     id: "mkt_bid_amount",
@@ -96,8 +106,9 @@ trader_dashboard.controller('table_controller',
                     sortable: false,
                     width: 60,
                     minWidth: 60,
-                    maxWidth: 60//,
-                    //formatter: mkt_cell_formatter
+                    maxWidth: 60,
+                    cssClass:"value-bold",
+                    formatter:mkt_cell_bid_formatter_DetailClick
                 },
                 {
                     id: "mkt_bid_rate",
@@ -106,25 +117,29 @@ trader_dashboard.controller('table_controller',
                     sortable: false,
                     width: 60,
                     minWidth: 60,
-                    maxWidth: 60
+                    maxWidth: 60,
+                    cssClass:"value-bold",
+                    formatter: mkt_cell_bid_formatter_Detail
                 },
                 {
                     id: "mkt_separator",
                     name: "",
                     field: "separator",
                     sortable: false,
-                    width: 10,
-                    minWidth: 10,
-                    maxWidth: 10
+                    width: 20,
+                    minWidth: 20,
+                    maxWidth: 20
                 },
                 {
                     id: "mkt_offer_rate",
-                    name: "Oferta",
+                    name: "Offer",
                     field: "mkt_offer_rate",
                     sortable: false,
                     width: 60,
                     minWidth: 60,
-                    maxWidth: 60
+                    maxWidth: 60,
+                    cssClass:"value-bold",
+                    formatter: mkt_cell_offer_formatter_Detail
                 },
                 {
                     id: "mkt_offer_amount",
@@ -133,7 +148,9 @@ trader_dashboard.controller('table_controller',
                     sortable: false,
                     width: 60,
                     minWidth: 60,
-                    maxWidth: 60
+                    maxWidth: 60,
+                    cssClass:"value-bold",
+                    formatter:mkt_cell_offer_formatter_DetailClick
                 },
                 {
                     id: "accept_offer",
@@ -142,9 +159,9 @@ trader_dashboard.controller('table_controller',
                     sortable: false,
                     formatter: button_accept_offer_formatter,
                     asyncPostRender: button_renderer,
-                    width: 30,
-                    minWidth: 30,
-                    maxWidth: 30
+                    width: 40,
+                    minWidth: 40,
+                    maxWidth: 40
                 },
                 {
                     id: "post_bid",
@@ -153,9 +170,9 @@ trader_dashboard.controller('table_controller',
                     sortable: false,
                     formatter: button_post_bid_formatter,
                     asyncPostRender: button_renderer,
-                    width: 30,
-                    minWidth: 30,
-                    maxWidth: 30
+                    width: 40,
+                    minWidth: 40,
+                    maxWidth: 40
                 },
                 {
                     id: "pst_bid_amount",
@@ -164,6 +181,7 @@ trader_dashboard.controller('table_controller',
                     sortable: false,
                     editor: Slick.Editors.Integer,
                     validator: amountValidation,
+                    cssClass:"value-bold",
                     width: 60,
                     minWidth: 60,
                     maxWidth: 60
@@ -174,28 +192,32 @@ trader_dashboard.controller('table_controller',
                     name: "Bid",
                     sortable: false,
                     editor: Slick.Editors.Float,
+                    cssClass:"value-bold",
                     width: 60,
                     minWidth: 60,
-                    maxWidth: 60
+                    maxWidth: 60,
+                    formatter: bid_cell_formatter
                 },
                 {
                     id: "pst_separator",
                     name: "",
                     field: "separator",
                     sortable: false,
-                    width: 10,
-                    minWidth: 10,
-                    maxWidth: 10
+                    width: 20,
+                    minWidth: 20,
+                    maxWidth: 20
                 },
                 {
                     id: "pst_offer_rate",
                     field: "pst_offer_rate",
-                    name: "Oferta",
+                    name: "Ask",
                     sortable: false,
                     editor: Slick.Editors.Float,
                     width: 60,
+                    cssClass:"value-bold",
                     minWidth: 60,
-                    maxWidth: 60
+                    maxWidth: 60,
+                    formatter: bid_cell_formatter
                 },
                 {
                     id: "pst_offer_amount",
@@ -205,6 +227,7 @@ trader_dashboard.controller('table_controller',
                     editor: Slick.Editors.Integer,
                     validator: amountValidation,
                     width: 60,
+                    cssClass:"value-bold",
                     minWidth: 60,
                     maxWidth: 60
                 },
@@ -215,20 +238,21 @@ trader_dashboard.controller('table_controller',
                     sortable: false,
                     formatter: button_post_offer_formatter,
                     asyncPostRender: button_renderer,
-                    width: 30,
-                    minWidth: 30,
-                    maxWidth: 30
-                },
+                    width: 40,
+                    minWidth: 40,
+                    maxWidth: 40
+                }
+                /*,
                 {
                     id: "cancel_mkt_add_post",
                     name: "BT",
                     sortable: false,
-                    width: 30,
-                    minWidth: 30,
-                    maxWidth: 30//,
+                    width: 40,
+                    minWidth: 40,
+                    maxWidth: 40//,
                     //formatter: button_post_offer_formatter,
                     //asyncPostRender: button_renderer
-                }
+                }*/
             ];
 
             $scope.data = {
@@ -263,13 +287,31 @@ trader_dashboard.controller('table_controller',
                         in_aggression_offer: false,
                         in_aggression_bid: false,
                         is_offer_aggressed: false,
-                        is_bid_aggressed: false
+                        is_bid_aggressed: false,
+                        is_my_bid_active: false,
+                        is_my_offer_active: false,
+                        bidMarketDetail:[],
+                        offerMarketDetail:[],
+                        disabledRow:false,
+                        highlightPositionBid:'#ffff00',
+                        highlightPositionTextBid:'#bf6314',
+                        highlightPositionOffer:'#ffff00',
+                        highlightPositionTextOffer:'#bf6314',
+
+                        highlightMyPositionBid:'#ffff00',
+                        highlightMyPositionTextBid:'#bf6314',
+                        highlightMyPositionOffer:'#ffff00',
+                        highlightMyPositionTextOffer:'#0153ff',
+                        
+                        nuRango:row.nuRango, 
+                        yield:row.rate
                     };
                     $scope.grid.data.push(data_row);
                 }
                 $scope.grid.data_view = new Slick.Data.DataView();
                 $scope.services.setDataView($scope.grid.data_view);
                 $scope.grid.table = new Slick.Grid("#trader-table", $scope.grid.data_view, $scope.grid.columns, $scope.grid.options);
+                //$scope.grid.table.registerPlugin( new Slick.AutoTooltips({ enableForHeaderCells: true }) );
                 $scope.grid.table.setSelectionModel(new Slick.CellSelectionModel());
                 $scope.grid.data_view.onRowCountChanged.subscribe(function (e, args) {
                     $scope.grid.table.updateRowCount();
@@ -279,6 +321,7 @@ trader_dashboard.controller('table_controller',
                     $scope.grid.table.invalidateRows(args.rows);
                     $scope.grid.table.render();
                 });
+
                 $scope.grid.data_view.setItems($scope.grid.data);
                 $scope.grid.table.onValidationError.subscribe(function (e, args) {
                     var dialog = $("#error-message");
@@ -297,8 +340,7 @@ trader_dashboard.controller('table_controller',
                     highlight_new_position($scope.grid.table, cellData.row, cellData.cell, 7, $scope.grid.data_view);
                 });
                 $scope.grid.table.onBeforeEditCell.subscribe(function (e, cellData) {
-                    if ((cellData.cell == 10 || cellData.cell == 11 || cellData.cell == 13 || cellData.cell == 14)
-                        && !isCellEditable($scope.grid.table.getColumns(), cellData.cell, cellData.item)) {
+                    if ((cellData.cell == 10 || cellData.cell == 11 || cellData.cell == 13 || cellData.cell == 14) && !isCellEditable($scope.grid.table.getColumns(), cellData.cell, cellData.item)) {
                         return false;
                     }
                 });
@@ -393,8 +435,12 @@ trader_dashboard.controller('table_controller',
             $scope.aggress_offer = $scope.services.aggressOffer;
             $scope.cancel_aggression_offer = $scope.services.cancelAggressionOffer;
             $scope.cancel_aggression_bid = $scope.services.cancelAggressionBid;
+            $scope.cancel_all = $scope.services.cancelAll;
+
 
             $scope.init();
+
+            $("<INPUT type=text class='editor-text' />").on("keyPress")
         }]);
 
 trader_dashboard.controller('movements_controller',
@@ -460,18 +506,25 @@ trader_dashboard.controller('graph_controller', ['$scope', '$http', 'TraderCache
         $http({url: urlGraph, method: "GET", params: data})
             .success(function (data) {
                 $scope.data.graph_data = data.list;
-                $scope.data.min = data.maxYield;
-                $scope.data.max = data.minYield;
+                $scope.data.min = data.minYield;
+                $scope.data.max = data.maxYield;
                 $("#line-chart").empty();
-                Morris.Line({
+                Morris.Area({
                     element: 'line-chart',
                     data: $scope.data.graph_data,
                     xkey: 'date',
                     ykeys: ['yield'],
                     labels: [$scope.data.dropdown_value],
-                    lineColors: ["#FFB253"],
-                    pointSize: 1,
-                    ymin: $scope.data.min,
+                    lineColors: ["#134A75"],
+                    stroke: ["#FDFEFF"],
+                    poinFillColors: ["#FDFEFF"],
+                    pointStrokeColors: ["#FDFEFF"],
+                    smooth: true,
+                    pointSize: 0,
+                    linewidth: 0.5,
+                    fillOpacity: 0.8,
+                    resize: true,
+                    ymin: $scope.data.min, 
                     ymax: $scope.data.max,
                     yLabelFormat: function(y_element){
                         var s = y_element.toString();
@@ -494,16 +547,28 @@ trader_dashboard.controller('graph_controller', ['$scope', '$http', 'TraderCache
             //TODO handle error
         });
     }
+    $scope.cleanGraph=function(){
+        $("#line-chart").empty();
+    }
     $scope.$watch(function () {
         $('#drop_down_graph_instrument').selectpicker('refresh');
     });
 }]);
 
-trader_dashboard.controller('navigation_controller', ['$scope', '$http', '$window', 'TraderCache', function ($scope, $http, $window) {
+trader_dashboard.controller('navigation_controller', ['$scope', '$http', '$window', 'TradeServices', function ($scope, $http, $window,services) {
+    $scope.services = services
     var data = {
         _csrf: $('input[name="_csrf"]').val()
     };
+    $scope.showDiv = false;
+    
+    var mute = getCookie("mute");
+    if(mute=="") {
+    	setCookie("mute","1",2);
+	}
+    
     $scope.logout = function () {
+        $scope.services.cancelAll();
         $http({
             method: "POST",
             url: urlLogout,
@@ -513,9 +578,39 @@ trader_dashboard.controller('navigation_controller', ['$scope', '$http', '$windo
         }).error(function (data, status) {
             alert("Error in logout status: " + status + " data:" + JSON.stringify(data));
         })
+    };
+
+    $scope.lockedApp=function () {
+        var x = document.getElementById("lockedDiv");
+        if (x.style.display === "none") {
+            $scope.showDiv = true;
+            x.style.display = "block";
+        } else {
+            $scope.showDiv = false;
+            x.style.display = "none";
+        }
+    };
+    $scope.mut=false;
+    $scope.muteapp=function (){
+    	
+    	console.log("[trader-app-dashboard.js][muteapp]");
+ 	   var mute = getCookie("mute");
+ 	   
+ 	   if(mute == "0"){
+ 		  console.log("[trader-app-dashboard.js][if1]");
+ 		  $scope.mut=false;
+ 		  muteAudio2();
+ 		  playAudio();
+ 		  setCookie("mute","1",2);
+ 	    }else if(mute="1"){
+ 	      console.log("[trader-app-dashboard.js][if2]");
+	 	  $scope.mut=true;
+	 	  muteAudio1();
+	 	  setCookie("mute","0",2);
+ 		} 
     }
 }]);
-
+	
 
 trader_dashboard.directive('signalLastElement', function () {
     return {
@@ -530,3 +625,5 @@ trader_dashboard.directive('signalLastElement', function () {
 
     }
 });
+
+

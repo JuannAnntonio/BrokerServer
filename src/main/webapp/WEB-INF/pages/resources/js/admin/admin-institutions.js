@@ -29,6 +29,7 @@ $(document).ready(function () {
         ],
         dataSrc: function (json) {
             var data = json.data;
+            console.log("### DATA_ADMIN_INST:: ", data);
             return data;
         },
         language: {

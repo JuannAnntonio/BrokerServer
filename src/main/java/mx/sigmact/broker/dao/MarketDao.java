@@ -2,7 +2,9 @@ package mx.sigmact.broker.dao;
 
 import mx.sigmact.broker.model.StandingEntity;
 import mx.sigmact.broker.model.UserEntity;
+import mx.sigmact.broker.pojo.trader.BlockDetail;
 import mx.sigmact.broker.pojo.trader.MarketPosition;
+import mx.sigmact.broker.pojo.trader.MarketPositionDetail;
 
 import java.util.HashMap;
 import java.util.List;
@@ -62,5 +64,12 @@ public interface MarketDao {
      * @return
      */
     List<StandingEntity> getCurrentActiveUserStandings(String user);
-
+    /**
+     * Get the market positions to display for a user
+     * @param instrumentoId ID for position in market
+     * @param user The StandingEntity representing the user
+     * @return
+     */
+    MarketPositionDetail getCurrentMarketPositionsDetailForUser(Integer instrumentoId,String biddingType,UserEntity user);
+    List<BlockDetail> getBlockDetailByPosition(Integer instrumentoId, String biddingType, UserEntity user);
 }

@@ -4,150 +4,142 @@ package mx.sigmact.broker.pojo.backoffice;
  * Created on 08/12/16.
  */
 public class BackOfficeMainView {
-    private String date;
-    private String transactionType;
-    private String instrument;
-    private String buyer;
-    private String seller;
-    private String workbench;
-    private String wbBuyPrice;
-    private String wbSellPrice;
-    private String amount;
-    private String wbAmount;
-    private String titles;
-    private String rate;
-    private String surcharge;
-    private String systemCommission;
 
-    public BackOfficeMainView(String date, String transactionType, String instrument, String buyer,
-                              String seller, String workbench, String wbBuyPrice, String wbSellPrice,
-                              String amount, String wbAmount, String titles, String rate, String surcharge,
-                              String systemCommission) {
-        this.date = date;
-        this.transactionType = transactionType;
-        this.instrument = instrument;
-        this.buyer = buyer;
-        this.seller = seller;
-        this.workbench = workbench;
-        this.wbBuyPrice = wbBuyPrice;
-        this.wbSellPrice = wbSellPrice;
-        this.amount = amount;
-        this.wbAmount = wbAmount;
-        this.titles = titles;
-        this.rate = rate;
-        this.surcharge = surcharge;
-        this.systemCommission = systemCommission;
-    }
+	private String folio;
+	private String fecha;
+	private String hora;
+	private String instrumeto;
+	private String dvx;
+	private String comprador;
+	private String vendedor;
+	private String tasa;
+	private String monto;
+	private String comision;
+	private String precio;
+	private String titulos;
+	private String fv;
 
-    public String getDate() {
-        return date;
-    }
+	public BackOfficeMainView(String folio, String fecha, String hora, String instrumeto, String dvx, String comprador,
+			String vendedor, String tasa, String monto, String comision, String precio, String titulos, String fv) {
 
-    public void setDate(String date) {
-        this.date = date;
-    }
+		this.folio = folio;
+		this.fecha = fecha;
+		this.hora = hora;
+		this.instrumeto = instrumeto;
+		this.dvx = dvx;
+		this.comprador = comprador;
+		this.vendedor = vendedor;
+		this.tasa = tasa;
+		this.monto = monto;
+		this.comision = comision;
+		this.precio = precio;
+		this.titulos = titulos;
+		this.fv = fv;
+		
+	}
 
-    public String getTransactionType() {
-        return transactionType;
-    }
+	public String getFolio() {
+		return folio;
+	}
 
-    public void setTransactionType(String transactionType) {
-        this.transactionType = transactionType;
-    }
+	public void setFolio(String folio) {
+		this.folio = folio;
+	}
 
-    public String getInstrument() {
-        return instrument;
-    }
+	public String getFecha() {
+		return fecha;
+	}
 
-    public void setInstrument(String instrument) {
-        this.instrument = instrument;
-    }
+	public void setFecha(String fecha) {
+		this.fecha = fecha;
+	}
 
-    public String getBuyer() {
-        return buyer;
-    }
+	public String getHora() {
+		return hora;
+	}
 
-    public void setBuyer(String buyer) {
-        this.buyer = buyer;
-    }
+	public void setHora(String hora) {
+		this.hora = hora;
+	}
 
-    public String getSeller() {
-        return seller;
-    }
+	public String getInstrumeto() {
+		return instrumeto;
+	}
 
-    public void setSeller(String seller) {
-        this.seller = seller;
-    }
+	public void setInstrumeto(String instrumeto) {
+		this.instrumeto = instrumeto;
+	}
 
-    public String getWorkbench() {
-        return workbench;
-    }
+	public String getDvx() {
+		return dvx;
+	}
 
-    public void setWorkbench(String workbench) {
-        this.workbench = workbench;
-    }
+	public void setDvx(String dvx) {
+		this.dvx = dvx;
+	}
 
-    public String getWbBuyPrice() {
-        return wbBuyPrice;
-    }
+	public String getComprador() {
+		return comprador;
+	}
 
-    public void setWbBuyPrice(String wbBuyPrice) {
-        this.wbBuyPrice = wbBuyPrice;
-    }
+	public void setComprador(String comprador) {
+		this.comprador = comprador;
+	}
 
-    public String getWbSellPrice() {
-        return wbSellPrice;
-    }
+	public String getVendedor() {
+		return vendedor;
+	}
 
-    public void setWbSellPrice(String wbSellPrice) {
-        this.wbSellPrice = wbSellPrice;
-    }
+	public void setVendedor(String vendedor) {
+		this.vendedor = vendedor;
+	}
 
-    public String getAmount() {
-        return amount;
-    }
+	public String getTasa() {
+		return tasa;
+	}
 
-    public void setAmount(String amount) {
-        this.amount = amount;
-    }
+	public void setTasa(String tasa) {
+		this.tasa = tasa;
+	}
 
-    public String getWbAmount() {
-        return wbAmount;
-    }
+	public String getMonto() {
+		return monto;
+	}
 
-    public void setWbAmount(String wbAmount) {
-        this.wbAmount = wbAmount;
-    }
+	public void setMonto(String monto) {
+		this.monto = monto;
+	}
 
-    public String getTitles() {
-        return titles;
-    }
+	public String getComision() {
+		return comision;
+	}
 
-    public void setTitles(String titles) {
-        this.titles = titles;
-    }
+	public void setComision(String comision) {
+		this.comision = comision;
+	}
 
-    public String getRate() {
-        return rate;
-    }
+	public String getPrecio() {
+		return precio;
+	}
 
-    public void setRate(String rate) {
-        this.rate = rate;
-    }
+	public void setPrecio(String precio) {
+		this.precio = precio;
+	}
 
-    public String getSurcharge() {
-        return surcharge;
-    }
+	public String getTitulos() {
+		return titulos;
+	}
 
-    public void setSurcharge(String surcharge) {
-        this.surcharge = surcharge;
-    }
+	public void setTitulos(String titulos) {
+		this.titulos = titulos;
+	}
 
-    public String getSystemCommission() {
-        return systemCommission;
-    }
+	public String getFv() {
+		return fv;
+	}
 
-    public void setSystemCommission(String systemCOmmission) {
-        this.systemCommission = systemCOmmission;
-    }
+	public void setFv(String fv) {
+		this.fv = fv;
+	}
+
 }

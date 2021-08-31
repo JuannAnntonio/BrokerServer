@@ -1,6 +1,10 @@
 package mx.sigmact.broker.controllers;
 
+import mx.sigmact.broker.model.InstitutionEntity;
+import mx.sigmact.broker.model.UserEntity;
 import mx.sigmact.broker.pojo.RoleType;
+import mx.sigmact.broker.repositories.BrokerInstitutionRepository;
+import mx.sigmact.broker.repositories.BrokerUserRepository;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -8,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import java.util.Collection;
 
 /**

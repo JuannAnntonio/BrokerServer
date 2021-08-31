@@ -1,8 +1,16 @@
 /**
  * Variables for the java script files
  * change the domain accordingly to the deployed host.
+ * Version Control 2.0
  */
-var domain = "http://localhost:8081/sigmact_broker/";/*cambie el puerto 80*/
+//prod->
+//var domain = "https://bbfixed.com/sigmact_broker/";
+//beta-> 
+//var domain = "http://bbfixed-beta.com/sigmact_broker/";
+//local -> 
+var domain = "/sigmact_broker/";
+
+//var domain = "http://216.55.178.98:9090/sigmact_broker/";
 //var domain = "http://23.91.66.54:8080/sigmact_broker/";
 //var domain = "http://sigmactdev.com:8080/sigmact_broker/"
 //var domain = "http://devsigmact.com:8080/sigmact_broker/"

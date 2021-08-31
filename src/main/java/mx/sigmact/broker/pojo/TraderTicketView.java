@@ -13,6 +13,14 @@ public class TraderTicketView {
     private Double realAmount;
     private Long titles;
     private Double price;
+    private String operation;
+    private String counterpart;
+    private Double agressionRate;
+    private Double commissionRate;
+    private Double negotiatedRate;
+    private String createDate;
+    private String liquidationDate;
+    private Long dxv;
 
     public TraderTicketView() {
     }
@@ -37,6 +45,48 @@ public class TraderTicketView {
         this.realAmount = realAmount;
         this.titles = titles;
         this.price = price;
+    }
+    /**
+     * Nueva vista para Trader
+     * @fecha
+     * @instrumento
+     * @operacion
+     * @contraparte
+     * @titulos
+     * @tasaNegociada
+     * @tasaComision
+     * @tasaAgredida
+     * @precio
+     * @monto
+     * */
+    public TraderTicketView(String fecha,
+                            String instrumento,
+                            String operacion,
+                            String contraparte,
+                            Long titulos,
+                            Double tasaNegociada,
+                            Double tasaComision,
+                            Double tasaAgredida,
+                            Double precio,
+                            Double montoLiquidar,
+                            Long montoNominal,
+                            String fechaCreacion,
+                            String fechaLiquidacion,
+                            Long dxv) {
+        this.dateTime = fecha;
+        this.instrument = instrumento;
+        this.operation = operacion;
+        this.counterpart = contraparte;
+        this.titles = titulos;
+        this.negotiatedRate = tasaNegociada;
+        this.commissionRate = tasaComision;
+        this.agressionRate = tasaAgredida;
+        this.price = precio;
+        this.realAmount = montoLiquidar;
+        this.amount = montoNominal;
+        this.createDate = fechaCreacion;
+        this.liquidationDate = fechaLiquidacion;
+        this.dxv = dxv;
     }
 
     public Double getRealAmount() {
@@ -109,5 +159,69 @@ public class TraderTicketView {
 
     public void setAmount(Long amount) {
         this.amount = amount;
+    }
+
+    public String getOperation() {
+        return operation;
+    }
+
+    public void setOperation(String operation) {
+        this.operation = operation;
+    }
+
+    public String getCounterpart() {
+        return counterpart;
+    }
+
+    public void setCounterpart(String counterpart) {
+        this.counterpart = counterpart;
+    }
+
+    public Double getAgressionRate() {
+        return agressionRate;
+    }
+
+    public void setAgressionRate(Double agressionRate) {
+        this.agressionRate = agressionRate;
+    }
+
+    public Double getCommissionRate() {
+        return commissionRate;
+    }
+
+    public void setCommissionRate(Double commissionRate) {
+        this.commissionRate = commissionRate;
+    }
+
+    public Double getNegotiatedRate() {
+        return negotiatedRate;
+    }
+
+    public void setNegotiatedRate(Double negotiatedRate) {
+        this.negotiatedRate = negotiatedRate;
+    }
+
+    public String getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(String createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getLiquidationDate() {
+        return liquidationDate;
+    }
+
+    public void setLiquidationDate(String liquidationDate) {
+        this.liquidationDate = liquidationDate;
+    }
+
+    public Long getDxv() {
+        return dxv;
+    }
+
+    public void setDxv(Long dxv) {
+        this.dxv = dxv;
     }
 }

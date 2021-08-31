@@ -407,7 +407,8 @@ public class ValmerServiceReader {
         StringBuffer response = new StringBuffer();
 
         while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
+            //log.info(inputLine);
+            response.append(inputLine+"\n");
         }
         in.close();
         return response.toString();

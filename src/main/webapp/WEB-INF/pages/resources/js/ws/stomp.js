@@ -141,6 +141,7 @@
     }
 
     Client.prototype.debug = function(message) {
+      console.log("[stomp.js][Client.prototype.debug]");
       var _ref;
       return typeof window !== "undefined" && window !== null ? (_ref = window.console) != null ? _ref.log(message) : void 0 : void 0;
     };
@@ -155,6 +156,17 @@
 
     Client.prototype._transmit = function(command, headers, body) {
       var out;
+      
+      console.log("[stomp][Client.prototype._transmit]");
+
+      console.log("[stomp][Client.prototype._transmit] headers");
+
+      console.log(headers);
+
+      console.log("[stomp][Client.prototype._transmit] body");
+      
+      console.log(body);
+      
       out = Frame.marshall(command, headers, body);
       if (typeof this.debug === "function") {
         this.debug(">>> " + out);
@@ -244,6 +256,9 @@
     };
 
     Client.prototype.connect = function() {
+    	
+    console.log("[stomp][connect]");
+    	
       var args, errorCallback, headers, out;
       args = 1 <= arguments.length ? __slice.call(arguments, 0) : [];
       out = this._parseConnect.apply(this, args);
@@ -253,6 +268,10 @@
       }
       this.ws.onmessage = (function(_this) {
         return function(evt) {
+        	
+          console.log("EVT: ");
+          console.log(evt);
+        	
           var arr, c, client, data, frame, messageID, onreceive, subscription, unmarshalledData, _i, _len, _ref, _results;
           data = typeof ArrayBuffer !== 'undefined' && evt.data instanceof ArrayBuffer ? (arr = new Uint8Array(evt.data), typeof _this.debug === "function" ? _this.debug("--- got data length: " + arr.length) : void 0, ((function() {
             var _i, _len, _results;
@@ -281,6 +300,9 @@
             frame = _ref[_i];
             switch (frame.command) {
               case "CONNECTED":
+            	  
+            	console.log("[stomp][connect] connected");
+            	  
                 if (typeof _this.debug === "function") {
                   _this.debug("connected to server " + frame.headers.server);
                 }
@@ -289,6 +311,9 @@
                 _results.push(typeof _this.connectCallback === "function" ? _this.connectCallback(frame) : void 0);
                 break;
               case "MESSAGE":
+
+              	console.log("[stomp][connect] MESSAGE");
+              	
                 subscription = frame.headers.subscription;
                 onreceive = _this.subscriptions[subscription] || _this.onreceive;
                 if (onreceive) {
@@ -312,6 +337,9 @@
                 }
                 break;
               case "RECEIPT":
+
+                console.log("[stomp][connect] RECEIPT");
+                	
                 _results.push(typeof _this.onreceipt === "function" ? _this.onreceipt(frame) : void 0);
                 break;
               case "ERROR":
@@ -342,6 +370,10 @@
           }
           headers["accept-version"] = Stomp.VERSIONS.supportedVersions();
           headers["heart-beat"] = [_this.heartbeat.outgoing, _this.heartbeat.incoming].join(',');
+          
+          console.log("Headers: ");
+          console.log(headers);
+          
           return _this._transmit("CONNECT", headers);
         };
       })(this);
@@ -369,6 +401,17 @@
     };
 
     Client.prototype.send = function(destination, headers, body) {
+    	
+      console.log("[stomp][Client.prototype.send]");
+
+      console.log("[stomp][Client.prototype.send] headers");
+
+      console.log(headers);
+
+      console.log("[stomp][Client.prototype.send] body");
+
+      console.log(body);
+    	
       if (headers == null) {
         headers = {};
       }
@@ -442,6 +485,11 @@
       }
       headers["message-id"] = messageID;
       headers.subscription = subscription;
+      
+      console.log("ack headers");
+
+      console.log(headers);
+      
       return this._transmit("ACK", headers);
     };
 
@@ -451,6 +499,12 @@
       }
       headers["message-id"] = messageID;
       headers.subscription = subscription;
+      
+
+      console.log("nack headers");
+
+      console.log(headers);
+      
       return this._transmit("NACK", headers);
     };
 

@@ -1,0 +1,161 @@
+
+/* ADD FOR CUSTOM TOOLTIPS*/
+
+.slick-cell{
+    overflow: visible;
+}
+
+.slick-cell .tip span{
+    z-index: 200;
+    display: none;
+    border-radius:4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.slick-cell .tip:hover span{
+    display: inline;
+    position: absolute;
+    border: 1px solid #8c8c8c;
+    background: #f4f4f4;
+}
+
+.slick-cell .tip > span{
+    width: 240px;
+    padding: 10px 12px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 200;
+    position: absolute;
+    font-size: 10px;
+    font-style: normal;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px; -o-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 4px 4px 4px #d9b3c3;
+    -moz-box-shadow: 4px 4px 4px #d9b3c3;
+    box-shadow: 4px 4px 4px #d9b3c3;
+    color: #000000;
+    background: #f4f4f4;
+    background: -moz-linear-gradient(top, #FBF5E6 0%, #FFFFFF 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FBF5E6), color-stop(100%,#FFFFFF));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FBF5E6', endColorstr='#FFFFFF',GradientType=0 );
+    border: 1px solid #8c8c8c;
+}
+
+.slick-cell .tip:hover > span{
+    opacity: 1;
+    text-decoration:none;
+    visibility: visible;
+    margin-top: 20px;
+    display: inline;
+    margin-left: -110px;
+}
+ /**/
+
+
+.slick-cell .tip-click span{
+    z-index: 200;
+    display: none;
+    border-radius:4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+}
+
+.slick-cell .tip-click:active span{
+    display: inline;
+    position: absolute;
+    border: 1px solid #8c8c8c;
+    background: #f4f4f4;
+}
+
+.slick-cell .tip-click > span{
+    width: 240px;
+    padding: 10px 12px;
+    opacity: 0;
+    visibility: hidden;
+    z-index: 200;
+    position: absolute;
+    font-size: 10px;
+    font-style: normal;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px; -o-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-box-shadow: 4px 4px 4px #d9b3c3;
+    -moz-box-shadow: 4px 4px 4px #d9b3c3;
+    box-shadow: 4px 4px 4px #d9b3c3;
+    color: #000000;
+    background: #f4f4f4;
+    background: -moz-linear-gradient(top, #FBF5E6 0%, #FFFFFF 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FBF5E6), color-stop(100%,#FFFFFF));
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FBF5E6', endColorstr='#FFFFFF',GradientType=0 );
+    border: 1px solid #8c8c8c;
+}
+
+.slick-cell .tip-click:active > span{
+    opacity: 1;
+    text-decoration:none;
+    visibility: visible;
+    margin-top: 20px;
+    display: inline;
+    margin-left: -110px;
+}
+
+.column-text-center{
+    text-align: center;
+}
+.column-text-right{
+    text-align: right;
+}
+
+.value-bold{
+    font-weight: bold;
+}
+/* ADD FOR PLACEHOLDER STYLE IN BID AND OFFER POST*/
+
+.placeholderPost {
+    position: absolute;
+    pointer-events: none;
+    top: 0;
+    bottom: 0;
+    height: 25px;
+    left: 10px;
+    margin: auto;
+    color: #ccc;
+}
+
+
+/*toolbar price*/
+html{
+    height: 100%;
+}
+body {
+    background-color: #FFFFFF;
+    height: 100%;
+}
+body > div > div.credits{
+    display: none;
+}
+body > div > div.addWidget{
+    display: none;
+}
+
+#wrapper {
+    min-width: 1800px;
+    height: calc(100% - 220px);
+}
+
+.wrapperPanel {
+    max-height: calc((100% - 86px)/2);
+}
+
+#lockedDiv {
+    position:absolute;
+    z-index: 1000;
+    left:0;
+    top:200px;
+    background: rgba(255,255,255,.1);
+    width:100%;
+    height: calc(100% - 220px);
+    display: none;
+}

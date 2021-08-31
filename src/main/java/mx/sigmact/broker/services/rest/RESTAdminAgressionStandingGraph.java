@@ -1,6 +1,7 @@
 package mx.sigmact.broker.services.rest;
 
 import mx.sigmact.broker.core.util.CalendarUtil;
+import mx.sigmact.broker.dao.UtilDao;
 import mx.sigmact.broker.model.AggressionEntity;
 import mx.sigmact.broker.model.StandingEntity;
 import mx.sigmact.broker.pojo.graphs.LineGraphTwoLineElements;
@@ -26,6 +27,9 @@ public class RESTAdminAgressionStandingGraph {
     private static final int STATDAYS = 90;
 
     @Resource
+    private UtilDao utilDao;
+
+    @Resource
     BrokerStandingRepository standingRepository;
 
     @Resource
@@ -34,9 +38,9 @@ public class RESTAdminAgressionStandingGraph {
     @RequestMapping(method = RequestMethod.GET, produces = "application/json")
     public LineGraphTwoLineElements[] doGetAggresionsAndStandings() {
         LineGraphTwoLineElements result[] = new LineGraphTwoLineElements[STATDAYS];
-        Calendar today = Calendar.getInstance();
+        Calendar today = utilDao.today();//Calendar.getInstance();
         today.add(Calendar.DAY_OF_MONTH, 1 - STATDAYS);
-        CalendarUtil.zeroTimeCalendar(today);
+        //CalendarUtil.zeroTimeCalendar(today);
         List<StandingEntity> byDatetimeGreaterThanEqualStandings = standingRepository.findByDatetimeGreaterThanEqual(today);
         List<AggressionEntity> byDatetimeGreaterThanEqualAggression = aggressionRepository.findByDatetimeGreaterThanEqual(today);
         HashMap<Calendar, Integer> mapStandings = new HashMap<>();

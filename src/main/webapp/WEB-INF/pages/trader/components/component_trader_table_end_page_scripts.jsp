@@ -1,5 +1,5 @@
 <script
-        src="http://code.jquery.com/ui/1.11.3/jquery-ui.min.js"
+        src="https://code.jquery.com/ui/1.11.3/jquery-ui.min.js"
         integrity="sha256-xI/qyl9vpwWFOXz7+x/9WkG5j/SVnSw21viy8fWwbeE="
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-morris/1.3.0/angular-morris.min.js"></script>

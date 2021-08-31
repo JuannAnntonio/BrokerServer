@@ -20,7 +20,7 @@
 <body ng-controller="graph_controller">
 <div id="wrapper">
     <%@include file="components/component_navigation_sidebar_admin.jsp" %>
-    <div id="page-wrapper">
+    <div id="page-wrapper" style="width: 100%">
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Datos de uso</h1>
@@ -63,5 +63,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-morris/1.3.0/angular-morris.min.js"></script>
 <script src="../resources/js/variables.js"></script>
 <script src="../resources/js/admin/admin-app-dashboard.js"></script>
+<script src="../resources/js/toastr.js?v=<%= System.currentTimeMillis() %>""></script>
 </body>
 </html>

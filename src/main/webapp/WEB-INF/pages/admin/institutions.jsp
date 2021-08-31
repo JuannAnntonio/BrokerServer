@@ -9,7 +9,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!doctype html>
-<html class="no-js" lang="es">
+<html class="no-js" lang="es" ng-app="admin-institutions">
 <head>
     <%@include file="components/component_header_meta_info.jsp" %>
 
@@ -60,5 +60,7 @@
 <%@include file="components/component_end_page_scripts_datatables.jsp" %>
 <script src="../resources/js/variables.js"></script>
 <script src="../resources/js/admin/admin-institutions.js"></script>
+<script src="../resources/js/admin/admin-app-institutions.js"></script>
+<script src="../resources/js/toastr.js?v=<%= System.currentTimeMillis() %>""></script>
 </body>
 </html>

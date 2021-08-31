@@ -8,5 +8,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  */
 public interface BrokerInstitutionRepository extends JpaRepository<InstitutionEntity, Integer> {
     InstitutionEntity findOneByName(String name);
-
+    InstitutionEntity findByIdInstitution(int id);
 }

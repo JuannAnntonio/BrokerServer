@@ -1088,7 +1088,7 @@ Licensed under the BSD-2-Clause License.
     };
 
     Line.prototype.drawLinePath = function(path, lineColor, lineIndex) {
-      return this.raphael.path(path).attr('stroke', lineColor).attr('stroke-width', this.lineWidthForSeries(lineIndex));
+      return this.raphael.path(path).attr('stroke', "#FFFFFF").attr('stroke-width', this.lineWidthForSeries(lineIndex));
     };
 
     Line.prototype.drawLinePoint = function(xPos, yPos, pointColor, lineIndex) {

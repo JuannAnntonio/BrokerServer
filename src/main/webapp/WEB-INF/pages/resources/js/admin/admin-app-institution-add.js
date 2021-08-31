@@ -27,14 +27,26 @@ var prev_name = null;
 
 function saveDetails() {
     var active_value = false;
+    
     if ($('#active').is(":checked")) {
         active_value = true;
     }
+    
     var workbenches = new Array();
     $("#multiselect_to").find("option").each(function()
     {
         workbenches.push(parseInt($(this).val()));
     });
+    
+    var nivelFueraMercado = document.getElementById('nivelFueraMercado').value;
+    var radios = document.getElementsByName('radios');
+    var opcion = 0;
+    for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+            opcion = radios[i].value;
+            break;
+        }
+    }
     var data = {
         previous_name: prev_name,
         name: $("#name").val(),
@@ -43,22 +55,63 @@ function saveDetails() {
         system_commission: $("#system_commission").val(),
         active: active_value,
         workbenches: workbenches,
+        nivelFueraMercado: nivelFueraMercado,
+        opcionRadio: opcion,
         _csrf: $('input[name="_csrf"]').val()
     }
-    $.ajax({
-        type: "POST",
-        url: urlSave,
-        data: data,
-        success: function (data) {
-            if (data) {
-                disableForm();
-                prev_name = $('input[id="name"]').val();
-            }
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            alert("Error: "+errorThrown+", text: "+textStatus+"jqXHR: "+jqXHR);
-        }
-    })
+    console.log("### DATA", data);
+    console.log(workbenches.length);
+    
+    if(workbenches.length==0){
+    	
+    	toastr["info"]("Selecciona por lo menos un banco de trabajo.","");
+    	
+    } else if($("#name").val()==""){
+
+        toastr["info"]("Coloca un nombre a la institución.", "");
+    	
+    } else if($("#phone").val()==""){
+
+        toastr["info"]("Coloca un telefono a la institución.", "");
+    	
+    } else if($("#phone").val()==""){
+
+        toastr["info"]("Coloca una clave a la institución.", "");
+    	
+    }else if($("#phone").val()==""){
+
+        toastr["info"]("Coloca una comisión a la institución.", "");
+    	
+    }  else {
+	    
+	    $.ajax({
+	        type: "POST",
+	        url: urlSave,
+	        data: data,
+	        success: function (data) {
+	        	
+	        	console.log("[admin-app-institution-add.js][saveDetails]");
+	        	
+	            if (data) {
+
+		            toastr["success"]("Se agreg� correctamente", "");
+		            
+	                disableForm();
+	                prev_name = $('input[id="name"]').val();
+	            } else {
+
+		            toastr["error"]("Error al agregar la instituci�n", "");
+	            }
+	            
+	        },
+	        error: function (jqXHR, textStatus, errorThrown) {
+
+	            toastr["error"]("Error al agregar la instituci�n, probablemente la clave est� duplicada!.", "");
+	        	
+	            console.log("Error: "+errorThrown+", text: "+textStatus+"jqXHR: "+jqXHR);
+	        }
+	    })
+    }
 }
 
 
@@ -87,10 +140,13 @@ admin_user_details.controller('multiselect', [function() {
 }]);
 
 admin_user_details.controller('navigation_controller', ['$scope', '$http', '$window', function ($scope, $http, $window) {
-    var data = {
+    
+	var data = {
         _csrf: $('input[name="_csrf"]').val()
     }
+    
     $scope.logout = function () {
+    	
         $http({
             method: "POST",
             url: urlLogout,
@@ -100,6 +156,7 @@ admin_user_details.controller('navigation_controller', ['$scope', '$http', '$win
         }).error(function (data, status) {
             alert("Error in logout status: " + status + " data:" + JSON.stringify(data));
         })
+        
     }
 }]);
 

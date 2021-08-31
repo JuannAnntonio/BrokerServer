@@ -22,4 +22,17 @@ public class StandingType {
         }
         return retVal;
     }
+
+    public static String getBidTypeName(int biddingTypeId) {
+        String retVal = "";
+        switch (biddingTypeId){
+            case StandingType.BIDID:
+                retVal = StandingType.BID;
+                break;
+            case StandingType.OFFERID:
+                retVal = StandingType.OFFER;
+                break;
+        }
+        return retVal;
+    }
 }

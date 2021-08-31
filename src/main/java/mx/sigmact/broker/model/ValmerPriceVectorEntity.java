@@ -1,6 +1,11 @@
 package mx.sigmact.broker.model;
 
 import javax.persistence.*;
+
+import org.apache.log4j.Logger;
+
+import mx.sigmact.broker.core.lib.DirtyPriceCalculator;
+
 import java.util.Calendar;
 
 /**
@@ -10,6 +15,8 @@ import java.util.Calendar;
 @Entity
 @Table(name = "VALMER_PRICE_VECTOR", schema = "SIGMACT_BROKER")
 public class ValmerPriceVectorEntity {
+    Logger log = Logger.getLogger(ValmerPriceVectorEntity.class);
+    
     private int idValmerPriceVector;
     private Calendar date;
     private String issue;
@@ -53,11 +60,18 @@ public class ValmerPriceVectorEntity {
     private String isin;
     private String verum;
     private int fkIdMarketType;
+    
+    public ValmerPriceVectorEntity() {
+    	
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id_valmer_price_vector", nullable = false)
+    @Column(name = "id_valmer_price_vector", nullable = true)
     public int getIdValmerPriceVector() {
+
+        log.info("[ValmerPriceVectorEntity][getIdValmerPriceVector]");
+        
         return idValmerPriceVector;
     }
 
@@ -487,6 +501,10 @@ public class ValmerPriceVectorEntity {
 
     @Override
     public boolean equals(Object o) {
+    	
+
+        log.info("[ValmerPriceVectorEntity][equals]");
+    	
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
@@ -550,6 +568,10 @@ public class ValmerPriceVectorEntity {
 
     @Override
     public int hashCode() {
+    	
+
+        log.info("[ValmerPriceVectorEntity][hashCode]");
+    	
         int result;
         long temp;
         result = idValmerPriceVector;

@@ -1,5 +1,18 @@
 package mx.sigmact.broker.controllers;
 
+import java.util.Iterator;
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
 import mx.sigmact.broker.dao.JdbcAdminDao;
 import mx.sigmact.broker.model.InstitutionEntity;
 import mx.sigmact.broker.model.InstrumentTypeEntity;
@@ -12,15 +25,6 @@ import mx.sigmact.broker.repositories.BrokerInstitutionRepository;
 import mx.sigmact.broker.repositories.BrokerInstrumentTypeRepository;
 import mx.sigmact.broker.repositories.BrokerRolesEntity;
 import mx.sigmact.broker.repositories.BrokerUserRepository;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.annotation.Resource;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * This class maps all the request for the admin mvc
@@ -29,6 +33,8 @@ import java.util.List;
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	
+	Logger log = Logger.getLogger(AdminController.class);
 
     @Resource
     BrokerUserRepository repo;
@@ -40,12 +46,17 @@ public class AdminController {
     BrokerInstrumentTypeRepository instTypeRepo;
     @Resource
     JdbcAdminDao adminDao;
-
+    @Resource
+    BrokerUserRepository userRepo;
 
     @RequestMapping(value = "dashboard", method = RequestMethod.GET)
     public ModelAndView adminDashBoardDoGet() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserEntity user = userRepo.findOneByUsername(username);
+        InstitutionEntity institutionEntity = instRepo.findByIdInstitution(user.getFkIdInstitution());
         ModelAndView mv = new ModelAndView();
         mv.setViewName("admin/dashboard");
+        mv.addObject("institution", institutionEntity.getName());
         return mv;
     }
 
@@ -56,6 +67,35 @@ public class AdminController {
         return mv;
     }
 
+    @RequestMapping(value = "priceprovider", method = RequestMethod.GET)
+    public ModelAndView adminPriceproviderDoGet() {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/priceprovider");
+        return mv;
+    }
+
+   @RequestMapping(value = "institutionmatrix", method = RequestMethod.GET)
+    public ModelAndView adminMatrixDoGet(@RequestParam("institution") String institutionName) {
+    	
+    	log.info("[AdminController][institutionmatrix]");
+    	
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin/institutionmatrix");
+        
+        return mv;
+    }
+   
+   @RequestMapping(value = "matrix_detail", method = RequestMethod.GET)
+   public ModelAndView adminMatrix2DoGet(@RequestParam("id") String id) {
+   	
+   	log.info("[AdminController][matrix_details]");
+   	
+       ModelAndView mv = new ModelAndView();
+       mv.setViewName("admin/matrix_details");
+       
+       return mv;
+   }
+   
     @RequestMapping(value = "users", method = RequestMethod.GET)
     public ModelAndView adminUsersDoGet() {
         ModelAndView mv = new ModelAndView();

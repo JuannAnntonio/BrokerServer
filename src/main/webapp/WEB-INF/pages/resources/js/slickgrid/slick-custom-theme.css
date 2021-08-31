@@ -4,6 +4,9 @@
     background: white;
     outline: 0;
     border: 1px solid gray;
+    font-size: 12px;
+    font-family: inherit;
+    /*font-weight: bold;*/
 }
 
 .grid-header {
@@ -39,7 +42,9 @@
     -webkit-border-radius: 2px;
     border: 1px solid silver;
 }
-
+.slick-header-columns > .slick-header-column{
+    height: 25px;
+}
 /* Individual cell styles */
 .slick-cell.task-name {
     font-weight: bold;

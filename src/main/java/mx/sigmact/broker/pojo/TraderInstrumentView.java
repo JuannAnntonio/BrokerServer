@@ -7,6 +7,8 @@ public class TraderInstrumentView {
     private Integer idVPV;
     private Integer dxv;
     private String name;
+    private Double rate;
+    private Double nuRango;
 
     public TraderInstrumentView() {
     }
@@ -17,6 +19,13 @@ public class TraderInstrumentView {
         this.name = name;
     }
 
+    public TraderInstrumentView(Integer idVPV, Integer dxv, String name, Double rate, Double nuRango) {
+        this.idVPV = idVPV;
+        this.dxv = dxv;
+        this.name = name;
+        this.rate = rate;
+        this.nuRango = nuRango;
+    }
     public Integer getIdVPV() {
         return idVPV;
     }
@@ -40,4 +49,16 @@ public class TraderInstrumentView {
     public void setName(String name) {
         this.name = name;
     }
+
+    public Double getRate() { return rate; }
+
+    public void setRate(Double rate) { this.rate = rate; }
+    
+    public Double getNuRango() {
+		return nuRango;
+	}
+
+	public void setNuRango(Double nuRango) {
+		this.nuRango = nuRango;
+	}
 }

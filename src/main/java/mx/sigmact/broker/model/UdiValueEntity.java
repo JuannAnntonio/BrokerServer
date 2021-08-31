@@ -2,6 +2,9 @@ package mx.sigmact.broker.model;
 
 import javax.persistence.*;
 import java.sql.Date;
+import org.apache.log4j.Logger;
+
+import mx.sigmact.broker.dao.JdbcFondeoDao;
 
 /**
  * Created on 28/11/16.
@@ -12,6 +15,7 @@ public class UdiValueEntity {
     private int idUdi;
     private Date udiDate;
     private double udiValue;
+	Logger log = Logger.getLogger(UdiValueEntity.class);
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -60,6 +64,9 @@ public class UdiValueEntity {
 
     @Override
     public int hashCode() {
+
+		log.info("[UdiValueEntity][hashCode]");
+		
         int result;
         long temp;
         result = idUdi;

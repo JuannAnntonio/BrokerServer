@@ -1,11 +1,22 @@
 package mx.sigmact.broker.core.util;
 
+import mx.sigmact.broker.core.lib.DaoHelper;
+import mx.sigmact.broker.dao.JdbcAdminDao;
+import org.springframework.beans.factory.annotation.Value;
+
+import javax.annotation.Resource;
+import javax.sql.DataSource;
+import java.sql.*;
 import java.util.Calendar;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Service;
 
 /**
  * Utility for working with Calendars
  * Created on 09/11/16.
  */
+
 public class CalendarUtil {
 
     /**
@@ -47,9 +58,7 @@ public class CalendarUtil {
         return diffSec;
     }
 
-
     public static Calendar today(){
         return CalendarUtil.zeroTimeCalendar(Calendar.getInstance());
     }
-
 }

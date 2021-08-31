@@ -96,14 +96,18 @@
     var scope = this;
 
     this.init = function () {
-      $input = $("<INPUT type=text class='editor-text' />");
-
+      $input = $("<INPUT type=text class='editor-text' id='monto' />");
+		console.log("[slick.editors.js][FloatEditor][init] 1 ");
       $input.on("keydown.nav", function (e) {
         if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
           e.stopImmediatePropagation();
+          return true
         }
-      });
+        if ((e.keyCode < 48 || (e.keyCode > 57 && e.keyCode < 96) || e.keyCode >105) && e.keyCode != 40 && e.keyCode!=38 && e.keyCode != 8 && e.keyCode != 46) {
+          return false
+        }
 
+      });
       $input.appendTo(args.container);
       $input.focus().select();
     };
@@ -168,8 +172,18 @@
       $input = $("<INPUT type=text class='editor-text' />");
 
       $input.on("keydown.nav", function (e) {
+    	  
+    	  console.log("[slick.editors.js][FloatEditor][init]");
+    	  console.log("[slick.editors.js][FloatEditor][init] e.keycode: " + e.keyCode);
+    	  
         if (e.keyCode === $.ui.keyCode.LEFT || e.keyCode === $.ui.keyCode.RIGHT) {
           e.stopImmediatePropagation();
+          return true
+        }
+        if (e.keyCode === 190 || e.keyCode === 110) {
+          return true;
+        }else if ((e.keyCode < 48 || (e.keyCode > 57 && e.keyCode < 96) || e.keyCode >105) && e.keyCode != 40 && e.keyCode!=38 && e.keyCode != 8 && e.keyCode != 46 && e.keyCode != 189 && e.keyCode != 109) {
+          return false
         }
       });
 

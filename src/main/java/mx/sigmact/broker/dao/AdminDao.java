@@ -12,6 +12,9 @@ import java.util.List;
 public interface AdminDao {
     List<AdminInstitutions> findByDate(Calendar calendar);
     AdminDashboard findDashBoardData();
+    List<AdminMatrix> findAdminMatrix(String institucion);
+    List<AdminMatrix2> findAdminMatrix2(String institucion);
+    int findEditMatrix (String id, String comision);
     List<AdminUsersView> findUsersView();
     List<AdminUsersView> findUsersView(String institution);
     UserInstruments findCurrentUserInstruments(Integer idUser);

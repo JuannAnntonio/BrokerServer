@@ -35,6 +35,15 @@ function saveDetails() {
     {
         workbenches.push(parseInt($(this).val()));
     });
+    var nivelFueraMercado = document.getElementById('nivelFueraMercado').value;
+    var radios = document.getElementsByName('radios');
+    var opcion = 0;
+    for (var i = 0, length = radios.length; i < length; i++) {
+        if (radios[i].checked) {
+            opcion = radios[i].value;
+            break;
+        }
+    }
     var data = {
         previous_name: prev_name,
         name: $("#name").val(),
@@ -43,6 +52,8 @@ function saveDetails() {
         system_commission: $("#system_commission").val(),
         active: active_value,
         workbenches: workbenches,
+        nivelFueraMercado: nivelFueraMercado,
+        opcionRadio: opcion,
         _csrf: $('input[name="_csrf"]').val()
     }
     $.ajax({

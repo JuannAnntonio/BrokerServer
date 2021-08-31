@@ -29,6 +29,7 @@ public class SigmactBrokerWebConfiguration extends WebMvcConfigurerAdapter {
 
     private final int maxUploadSizeInMb = 50 * 1024 * 1024; // 50 MB
 
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/pages/resources/");

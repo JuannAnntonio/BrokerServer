@@ -5,7 +5,9 @@
 var url = domain + "admin/rest/getDashboardInfo";
 
 var admin_dashboard = angular.module('admin_dashboard', ['angular.morris']);
+
 admin_dashboard.controller('graph_controller', function ($scope, $http) {
+	console.log("[admin_Dashboard.js]");
     $http.get(url);
     $.getJSON(url, function (data) {
             $scope.lastQuarterTradedAmount = data.lastQuarterTradedAmount;
@@ -19,6 +21,7 @@ admin_dashboard.controller('navigation_controller', ['$scope', '$http', '$window
         _csrf: $('input[name="_csrf"]').val()
     }
     $scope.logout = function () {
+
         $http({
             method: "POST",
             url: urlLogout,
@@ -30,5 +33,3 @@ admin_dashboard.controller('navigation_controller', ['$scope', '$http', '$window
         })
     }
 }]);
-
-

@@ -5331,6 +5331,11 @@ function URL(address, location, parser) {
   //
   // Parse down the `auth` for the username and password.
   //
+  
+  console.log("[sockjs]");
+
+  console.log(url);
+  
   url.username = url.password = '';
   if (url.auth) {
     instruction = url.auth.split(':');

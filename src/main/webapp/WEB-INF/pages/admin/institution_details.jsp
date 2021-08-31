@@ -12,9 +12,7 @@
 <html class="no-js" lang="es" ng-app="admin-institution-details">
 <head>
     <%@include file="components/component_header_meta_info.jsp" %>
-
     <%@include file="components/component_header_stylesheets.jsp" %>
-
     <%@include file="components/component_header_java_script.jsp" %>
 </head>
 <body>
@@ -23,7 +21,7 @@
     <div id="page-wrapper">
         <div class="row">
             <div class="col-lg-12">
-                <h1 class="page-header">Institutciones</h1>
+                <h1 class="page-header">Instituciones</h1>
             </div>
             <div id="page-controls" class="col-lg-12 btn-group" ng-controller="institution_edit">
                 <a id="edit_button" class="btn btn-default" ng-click="enableForm()"><i class="fa fa-edit fa-fw"></i>Editar</a>
@@ -71,9 +69,18 @@
                                            class="form-control" value="${institution.systemCommission}">
                                 </div>
                             </div>
-                            <div class="form-group checkbox">
-                                <label class="col-sm-3" for="active">Activo:
-                                </label>
+                            <div class="form-group">
+                                <label class="col-sm-3" for="nivelFueraMercado">Nivel Fuera de Mercado:</label>
+                                <div class="col-sm-9">
+                                    <input disabled type="text"
+                                        value="${institution.rango}"
+                                        oninput="this.value = this.value.replace(/[^0-9.]/g, '').replace(/(\..*?)\..*/g, '$1');"
+                                        required id="nivelFueraMercado"
+                                        placeholder="Parámetro de Nivel Fuera de Mercado" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-sm-3" for="active">Activo:</label>
                                 <div class="col-sm-9">
                                     <input disabled type="checkbox" required id="active" class="form-control"
                                            <c:if test="${institution.enabled != 0}">checked</c:if> data-toggle="toggle"
@@ -81,6 +88,9 @@
                                            data-onstyle="success" data-offstyle="danger">
                                 </div>
                             </div>
+
+                            
+
                             <br>
                             <div class="form-group" id="multiselect_div" ng-controller="multiselect">
                                 <div class="col-sm-2">
@@ -131,5 +141,6 @@
 <script src="../resources/js/admin/admin-app-institution-details.js"></script>
 <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+<script src="../resources/js/toastr.js?v=<%= System.currentTimeMillis() %>""></script>
 </body>
 </html>
