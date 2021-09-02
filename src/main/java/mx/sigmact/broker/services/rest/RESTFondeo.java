@@ -9,6 +9,8 @@ import mx.sigmact.broker.model.InstitutionEntity;
 import mx.sigmact.broker.model.UserEntity;
 import mx.sigmact.broker.pojo.backoffice.DTABackOfficeDashboard;
 import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
+/*Modificacion LF EYS */
+import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
 import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
 import mx.sigmact.broker.pojo.parameter.ValueParameter;
@@ -46,6 +48,9 @@ public class RESTFondeo {
     FondeoGubernamental fondeoGubernamental = null;
 
     FondeoCetes fondeoCetes = null;
+
+    /*Modificacion LF EYS */
+    FondeoTiie fondeoTiie = null;
 	
     Logger log = Logger.getLogger(RESTFondeo.class);
 
@@ -62,6 +67,20 @@ public class RESTFondeo {
         
         return this.fondeoBancario;
     }
+
+    /*Modificacion LF EYS */
+    @RequestMapping(value = "getFondeoTiieLastRegister", method = RequestMethod.GET, produces = "application/json")
+    public FondeoTiie doGetFondeoTiieLastRegister() {
+    	
+        log.info("[RESTFondeo][getFondeoTiieLastRegister]");
+
+        this.fondeoTiie = fondeoTiieDao.getFondeoTiieLastRegister();
+        
+        return this.fondeoTiie;
+    }
+
+
+
     
     /**
      * This method is for the main back office information returns the

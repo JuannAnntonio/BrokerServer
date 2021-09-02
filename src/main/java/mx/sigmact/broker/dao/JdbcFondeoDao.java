@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Value;
 
 import mx.sigmact.broker.core.lib.DaoHelper;
 import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
+import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
 import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
 
@@ -39,11 +40,16 @@ public class JdbcFondeoDao implements FondeoDao {
 	@Value("${query.fonde_cetes.getLastID}")
 	String getFondeoCetesLastRegister;
 
+	@Value("${query.fonde_tiie.getLastID}")
+	String getFondeoTiieLastRegister;
+
 	FondeoCetes fondeoCetes = null;
 	
 	FondeoGubernamental fondeoGubernamental = null;
 	
 	FondeoBancario fondeoBancario = null;
+
+	FondeoTiie fondeoTiie = null;
 
 	@Override
 	public FondeoBancario getFondeoLastRegister() {
@@ -81,6 +87,45 @@ public class JdbcFondeoDao implements FondeoDao {
 		}
 
 		return this.fondeoBancario;
+
+	}
+
+	@Override
+	public FondeoTiie getFondeoTiieLastRegister() {
+
+		/*
+		 * Para mostrar datos el parametro date tiene que venir de la tabla parameter.
+		 * Para que muestre datos al igual date y las tablas standing, aggression,
+		 * ticket_sent" tienen que empatar con la misma fecha.
+		 */
+
+		log.info("[JdbcFondeoDAO][getFondeoTiieLastRegister]");
+
+		log.info("[JdbcFondeoDAO][getFondeoTiieLastRegister] exec query: query.fondeo_tiie1.getLastID");
+
+		this.fondeoTiie= null;
+
+		try (Connection con = dataSource.getConnection();
+
+				PreparedStatement ps = daoHelper.createPreparedStatement(con, getFondeoTiieLastRegister);
+				ResultSet rs = ps.executeQuery()) {
+
+			while (rs.next()) {
+
+				log.info("[JdbcFondeoDAO][getFondeoTiieLastRegister] exec query Res Date: " + rs.getString(1));
+				log.info("[JdbcFondeoDAO][getFondeoTiieLastRegister] exec query Res Rate: " + rs.getString(2));
+				String date = rs.getString(1);
+				String rate = rs.getString(2);
+
+				this.fondeoTiie = new FondeoTiie(date, rate);
+
+			}
+			con.close();
+		} catch (SQLException e) {
+			log.error("[JdbcFondeoDAO][getFondeoTiieLastRegister] ERROR: Error al cargar la tabla fondeo_tiie1: " + e.getMessage());
+		}
+
+		return this.fondeoTiie;
 
 	}
 

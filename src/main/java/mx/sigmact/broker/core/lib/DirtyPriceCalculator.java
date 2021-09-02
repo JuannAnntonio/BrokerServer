@@ -26,7 +26,10 @@ import mx.sigmact.broker.model.ValmerPriceVectorEntity;
 import mx.sigmact.broker.pojo.backoffice.BackOfficeReporteCalculadoraPreciosDetalles;
 import mx.sigmact.broker.pojo.backoffice.BackOfficeReporteCalculadoraPreciosDetalles_list;
 import mx.sigmact.broker.pojo.coupon_bonde.Coupon_rate;
+import mx.sigmact.broker.pojo.coupon_bondeF.Coupon_rate;
 import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
+/*Modificacion LF EYS */
+import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
 import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
 import mx.sigmact.broker.pojo.udi.Udi;
@@ -66,6 +69,9 @@ public class DirtyPriceCalculator {
     private FondeoDao fondeoDao;
 
     FondeoBancario fondeoBancario = null;
+
+    /*Modificacion LF EYS */
+    FondeoTiie fondeoTiie = null;
 
     FondeoGubernamental fondeoGubernamental = null;
 
@@ -1190,14 +1196,14 @@ public class DirtyPriceCalculator {
         Double price = 0.0;
         Integer drag = 0;
         drag = couponPeriod - periodoCuponOriginal;
-        this.fondeoBancario = new FondeoBancario("30/08/2021", "7.77");//fondeoTiieDao.getFondeoLastRegister();
-        Double tasaDeMercado = Double.valueOf(this.fondeoBancario.getRate());
+        this.fondeoTiie = fondeoDao.getFondeoTiieLastRegister();
+        Double tasaDeMercado = Double.valueOf(this.fondeoTiie.getRate());
         double intereses = 0.0;
         double interesesDev = 0.0;
         Calendar lCouponEndIntereses = null;
         intereses = nominalValue * (couponRate * lCouponPeriod / 36000);
 
-        log.info("[DirtyPriceCalculator][dirtPriceLF] Tasa de Mercado: " + this.fondeoBancario.getRate());
+        log.info("[DirtyPriceCalculator][dirtPriceLF] Tasa de Mercado: " + this.fondeoTiie.getRate());
         log.info("[DirtyPriceCalculator][dirtPriceLF] Diferencia Periodo original menos Periodo Cupon: " + drag);
         log.info("[DirtyPriceCalculator][dirtPriceLF] Intereses Del Periodo: " + intereses);
         log.info("[DirtyPriceCalculator][dirtPriceLF] Inicia Iteracion");
@@ -1402,14 +1408,14 @@ public class DirtyPriceCalculator {
         Double price = 0.0;
         Integer drag = 0;
         drag = couponPeriod - periodoCuponOriginal;
-        this.fondeoBancario = new FondeoBancario("30/08/2021", "7.77");//fondeoTiieDao.getFondeoLastRegister();
-        Double tasaDeMercado = Double.valueOf(this.fondeoBancario.getRate());
+        this.fondeoTiie = fondeo.getFondeoTiieLastRegister();
+        Double tasaDeMercado = Double.valueOf(this.fondeoTiie.getRate());
         double intereses = 0.0;
         double interesesDev = 0.0;
         Calendar lCouponEndIntereses = null;
         intereses = nominalValue * (couponRate * lCouponPeriod / 36000);
 
-        log.info("[DirtyPriceCalculator][dirtPriceLFDetalles] Tasa de Mercado: " + this.fondeoBancario.getRate());
+        log.info("[DirtyPriceCalculator][dirtPriceLFDetalles] Tasa de Mercado: " + this.fondeoTiie.getRate());
         log.info("[DirtyPriceCalculator][dirtPriceLFDetalles] Diferencia Periodo original menos Periodo Cupon: " + drag);
         log.info("[DirtyPriceCalculator][dirtPriceLFDetalles] Intereses Del Periodo: " + intereses);
         log.info("[DirtyPriceCalculator][dirtPriceLFDetalles] Inicia Iteracion");

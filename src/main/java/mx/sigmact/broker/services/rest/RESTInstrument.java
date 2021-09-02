@@ -11,6 +11,7 @@ import mx.sigmact.broker.model.InstitutionEntity;
 import mx.sigmact.broker.model.UserEntity;
 import mx.sigmact.broker.pojo.backoffice.DTABackOfficeDashboard;
 import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
+import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
 import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
 import mx.sigmact.broker.pojo.instrument.Instrument;
