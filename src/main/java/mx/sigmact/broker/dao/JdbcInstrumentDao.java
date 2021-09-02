@@ -13,7 +13,6 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import mx.sigmact.broker.core.lib.DaoHelper;
 import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
-import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
 import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
 import mx.sigmact.broker.pojo.instrument.Instrument;

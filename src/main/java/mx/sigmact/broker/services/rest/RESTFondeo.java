@@ -1,30 +1,21 @@
 package mx.sigmact.broker.services.rest;
 
-import mx.sigmact.broker.core.lib.DirtyPriceCalculator;
-import mx.sigmact.broker.core.util.CalendarUtil;
-import mx.sigmact.broker.dao.BackOfficeDao;
-import mx.sigmact.broker.dao.FondeoDao;
-import mx.sigmact.broker.dao.ParameterDao;
-import mx.sigmact.broker.model.InstitutionEntity;
-import mx.sigmact.broker.model.UserEntity;
-import mx.sigmact.broker.pojo.backoffice.DTABackOfficeDashboard;
-import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
-/*Modificacion LF EYS */
-import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
-import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
-import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
-import mx.sigmact.broker.pojo.parameter.ValueParameter;
+import java.text.SimpleDateFormat;
+
+import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
+
+import mx.sigmact.broker.core.lib.DirtyPriceCalculator;
+import mx.sigmact.broker.dao.FondeoDao;
+import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
+import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
+import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
+/*Modificacion LF EYS */
+import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 
 /**
  * Created on 07/12/16.
@@ -34,79 +25,79 @@ import java.util.Calendar;
 @RequestMapping("fondeo/rest")
 public class RESTFondeo {
 
-    @Resource
-    private DirtyPriceCalculator dpCalc;
+	@Resource
+	private DirtyPriceCalculator dpCalc;
 
-    @Resource(name = "formatDate")
-    private SimpleDateFormat sdf;
-    
-    @Resource
-    private FondeoDao fondeoDao;
+	@Resource(name = "formatDate")
+	private SimpleDateFormat sdf;
 
-    FondeoBancario fondeoBancario = null;
+	@Resource
+	private FondeoDao fondeoDao;
 
-    FondeoGubernamental fondeoGubernamental = null;
+	FondeoBancario fondeoBancario = null;
 
-    FondeoCetes fondeoCetes = null;
+	FondeoGubernamental fondeoGubernamental = null;
 
-    /*Modificacion LF EYS */
-    FondeoTiie fondeoTiie = null;
-	
-    Logger log = Logger.getLogger(RESTFondeo.class);
+	FondeoCetes fondeoCetes = null;
 
-    /**
-     * This method is for the main back office information returns the
-     * @return A list with main information for back office
-     */
-    @RequestMapping(value = "getFondeoLastRegister", method = RequestMethod.GET, produces = "application/json")
-    public FondeoBancario doGetFondeoLastRegister() {
-    	
-        log.info("[RESTFondeo][getFondeoLastRegister]");
+	/* Modificacion LF EYS */
+	FondeoTiie fondeoTiie = null;
 
-        this.fondeoBancario = fondeoDao.getFondeoLastRegister();
-        
-        return this.fondeoBancario;
-    }
+	Logger log = Logger.getLogger(RESTFondeo.class);
 
-    /*Modificacion LF EYS */
-    @RequestMapping(value = "getFondeoTiieLastRegister", method = RequestMethod.GET, produces = "application/json")
-    public FondeoTiie doGetFondeoTiieLastRegister() {
-    	
-        log.info("[RESTFondeo][getFondeoTiieLastRegister]");
+	/**
+	 * This method is for the main back office information returns the
+	 * 
+	 * @return A list with main information for back office
+	 */
+	@RequestMapping(value = "getFondeoLastRegister", method = RequestMethod.GET, produces = "application/json")
+	public FondeoBancario doGetFondeoLastRegister() {
 
-        this.fondeoTiie = fondeoTiieDao.getFondeoTiieLastRegister();
-        
-        return this.fondeoTiie;
-    }
+		log.info("[RESTFondeo][getFondeoLastRegister]");
 
+		this.fondeoBancario = fondeoDao.getFondeoLastRegister();
 
+		return this.fondeoBancario;
+	}
 
-    
-    /**
-     * This method is for the main back office information returns the
-     * @return A list with main information for back office
-     */
-    @RequestMapping(value = "getFondeoGubernamentalLastRegister", method = RequestMethod.GET, produces = "application/json")
-    public FondeoGubernamental doGetFondeoGubernamentalLastRegister() {
-    	
-        log.info("[RESTFondeo][doGetFondeoGubernamentalLastRegister]");
+	/* Modificacion LF EYS */
+	@RequestMapping(value = "getFondeoTiieLastRegister", method = RequestMethod.GET, produces = "application/json")
+	public FondeoTiie doGetFondeoTiieLastRegister() {
 
-        this.fondeoGubernamental = fondeoDao.getFondeoGubernamentalLastRegister();
-        
-        return this.fondeoGubernamental;
-    }
-    
-    /**
-     * This method is for the main back office information returns the
-     * @return A list with main information for back office
-     */
-    @RequestMapping(value = "getFondeoCetesLastRegister", method = RequestMethod.GET, produces = "application/json")
-    public FondeoCetes doGetFondeoCetesLastRegister() {
-    	
-        log.info("[RESTFondeo][doGetFondeoCetesLastRegister]");
+		log.info("[RESTFondeo][getFondeoTiieLastRegister]");
 
-        this.fondeoCetes = fondeoDao.getFondeoCetesLastRegister();
-        
-        return this.fondeoCetes;
-    }
+		this.fondeoTiie = fondeoDao.getFondeoTiieLastRegister();
+
+		return this.fondeoTiie;
+	}
+
+	/**
+	 * This method is for the main back office information returns the
+	 * 
+	 * @return A list with main information for back office
+	 */
+	@RequestMapping(value = "getFondeoGubernamentalLastRegister", method = RequestMethod.GET, produces = "application/json")
+	public FondeoGubernamental doGetFondeoGubernamentalLastRegister() {
+
+		log.info("[RESTFondeo][doGetFondeoGubernamentalLastRegister]");
+
+		this.fondeoGubernamental = fondeoDao.getFondeoGubernamentalLastRegister();
+
+		return this.fondeoGubernamental;
+	}
+
+	/**
+	 * This method is for the main back office information returns the
+	 * 
+	 * @return A list with main information for back office
+	 */
+	@RequestMapping(value = "getFondeoCetesLastRegister", method = RequestMethod.GET, produces = "application/json")
+	public FondeoCetes doGetFondeoCetesLastRegister() {
+
+		log.info("[RESTFondeo][doGetFondeoCetesLastRegister]");
+
+		this.fondeoCetes = fondeoDao.getFondeoCetesLastRegister();
+
+		return this.fondeoCetes;
+	}
 }

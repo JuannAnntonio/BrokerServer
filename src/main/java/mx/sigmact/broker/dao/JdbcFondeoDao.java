@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Value;
 
 import mx.sigmact.broker.core.lib.DaoHelper;
 import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
-import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
 import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
+import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 
 public class JdbcFondeoDao implements FondeoDao {
 
@@ -27,7 +27,7 @@ public class JdbcFondeoDao implements FondeoDao {
 
 	@Resource
 	DataSource dataSource;
-	
+
 	@Resource
 	DaoHelper daoHelper;
 
@@ -44,9 +44,9 @@ public class JdbcFondeoDao implements FondeoDao {
 	String getFondeoTiieLastRegister;
 
 	FondeoCetes fondeoCetes = null;
-	
+
 	FondeoGubernamental fondeoGubernamental = null;
-	
+
 	FondeoBancario fondeoBancario = null;
 
 	FondeoTiie fondeoTiie = null;
@@ -83,7 +83,8 @@ public class JdbcFondeoDao implements FondeoDao {
 			}
 			con.close();
 		} catch (SQLException e) {
-			log.error("[JdbcFondeoDAO][getFondeoLastRegister] ERROR: Error al cargar la tabla fondeo_bancario: " + e.getMessage());
+			log.error("[JdbcFondeoDAO][getFondeoLastRegister] ERROR: Error al cargar la tabla fondeo_bancario: "
+					+ e.getMessage());
 		}
 
 		return this.fondeoBancario;
@@ -103,7 +104,7 @@ public class JdbcFondeoDao implements FondeoDao {
 
 		log.info("[JdbcFondeoDAO][getFondeoTiieLastRegister] exec query: query.fondeo_tiie1.getLastID");
 
-		this.fondeoTiie= null;
+		this.fondeoTiie = null;
 
 		try (Connection con = dataSource.getConnection();
 
@@ -122,7 +123,8 @@ public class JdbcFondeoDao implements FondeoDao {
 			}
 			con.close();
 		} catch (SQLException e) {
-			log.error("[JdbcFondeoDAO][getFondeoTiieLastRegister] ERROR: Error al cargar la tabla fondeo_tiie1: " + e.getMessage());
+			log.error("[JdbcFondeoDAO][getFondeoTiieLastRegister] ERROR: Error al cargar la tabla fondeo_tiie1: "
+					+ e.getMessage());
 		}
 
 		return this.fondeoTiie;
@@ -161,7 +163,9 @@ public class JdbcFondeoDao implements FondeoDao {
 			}
 			con.close();
 		} catch (SQLException e) {
-			log.error("[JdbcFondeoDAO][getFondeoGubernamentalLastRegister] ERROR: Error al cargar la tabla fondeo_bancario: " + e.getMessage());
+			log.error(
+					"[JdbcFondeoDAO][getFondeoGubernamentalLastRegister] ERROR: Error al cargar la tabla fondeo_bancario: "
+							+ e.getMessage());
 		}
 
 		return this.fondeoGubernamental;
@@ -200,7 +204,8 @@ public class JdbcFondeoDao implements FondeoDao {
 			}
 			con.close();
 		} catch (SQLException e) {
-			log.error("[JdbcFondeoDAO][getFondeoCetesLastRegister] ERROR: Error al cargar la tabla fondeo_bancario: " + e.getMessage());
+			log.error("[JdbcFondeoDAO][getFondeoCetesLastRegister] ERROR: Error al cargar la tabla fondeo_bancario: "
+					+ e.getMessage());
 		}
 
 		return this.fondeoCetes;

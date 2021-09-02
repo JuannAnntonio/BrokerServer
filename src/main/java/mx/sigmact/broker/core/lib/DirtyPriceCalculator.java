@@ -26,12 +26,11 @@ import mx.sigmact.broker.model.ValmerPriceVectorEntity;
 import mx.sigmact.broker.pojo.backoffice.BackOfficeReporteCalculadoraPreciosDetalles;
 import mx.sigmact.broker.pojo.backoffice.BackOfficeReporteCalculadoraPreciosDetalles_list;
 import mx.sigmact.broker.pojo.coupon_bonde.Coupon_rate;
-import mx.sigmact.broker.pojo.coupon_bondeF.Coupon_rate;
 import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
-/*Modificacion LF EYS */
-import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
 import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
+/*Modificacion LF EYS */
+import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 import mx.sigmact.broker.pojo.udi.Udi;
 import mx.sigmact.broker.repositories.BrokerCalendarRespository;
 import mx.sigmact.broker.repositories.BrokerStandingRepository;
@@ -1408,7 +1407,7 @@ public class DirtyPriceCalculator {
         Double price = 0.0;
         Integer drag = 0;
         drag = couponPeriod - periodoCuponOriginal;
-        this.fondeoTiie = fondeo.getFondeoTiieLastRegister();
+        this.fondeoTiie = fondeoDao.getFondeoTiieLastRegister();
         Double tasaDeMercado = Double.valueOf(this.fondeoTiie.getRate());
         double intereses = 0.0;
         double interesesDev = 0.0;

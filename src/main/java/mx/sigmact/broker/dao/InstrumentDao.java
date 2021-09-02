@@ -5,7 +5,6 @@ import mx.sigmact.broker.pojo.TraderActivityView;
 import mx.sigmact.broker.pojo.TraderInstrumentView;
 import mx.sigmact.broker.pojo.TraderTicketView;
 import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
-import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
 import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
 import mx.sigmact.broker.pojo.instrument.Instrument;

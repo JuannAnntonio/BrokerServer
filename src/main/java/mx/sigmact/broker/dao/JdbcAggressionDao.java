@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Value;
 import mx.sigmact.broker.core.lib.DaoHelper;
 import mx.sigmact.broker.pojo.aggression.Aggression;
 import mx.sigmact.broker.pojo.fondeo.FondeoBancario;
-import mx.sigmact.broker.pojo.fondeo.FondeoTiie;
 import mx.sigmact.broker.pojo.fondeo.FondeoCetes;
 import mx.sigmact.broker.pojo.fondeo.FondeoGubernamental;
 import mx.sigmact.broker.pojo.parameter.ValueParameter;
